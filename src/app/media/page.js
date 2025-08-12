@@ -62,12 +62,9 @@ function Page() {
           <div className="p-4 text-left">
             <h2 className="text-xl font-semibold mb-5 text-black">MSME Summit</h2>
             <p className="text-sm text-gray-600">
-              Dheeraj Khullar, the new Chamber President, pledged active efforts toward resolving traders’ issues
-              and boosting regional growth. Administrators like the Divisional Commissioner and District Magistrate
-              assured full support. MP Sharma also unveiled major infrastructure projects, including a new flyover
-              bridge at Hansari Crossing, four-lane roads, and water supply initiatives.
+              The Bundelkhand Chamber of Commerce and Industry successfully organized the MSME Summit on 15th February 2023 at Jhansi. The event brought together entrepreneurs, policymakers, bankers, and industry experts to discuss the growth potential of Micro, Small, and Medium Enterprises in the Bundelkhand region.
             </p>
-            <p className="text-xs text-gray-500 mt-2 text-right">April 10, 2025</p>
+            <p className="text-xs text-gray-500 mt-2 text-right">February 15, 2023</p>
           </div>
         </div>
 

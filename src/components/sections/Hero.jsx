@@ -10,7 +10,7 @@ const images = [
     src: "/hero2.jpeg",
     heading: (
       <>
-        Networking for Growth <br /> & Innovation
+        Bundelkhand Means <br /> Business
       </>
     ),
     button: "Become a Member",
@@ -20,7 +20,7 @@ const images = [
     src: "/hero3.jpeg",
     heading: (
       <>
-        Collaborate. Innovate. <br /> Succeed.
+        Where Business Meets  <br />  Opportunity.
       </>
     ),
     button: "Explore Services",
@@ -30,7 +30,7 @@ const images = [
     src: "/hero1.jpg",
     heading: (
       <>
-        Empowering Businesses <br /> in Bundelkhand
+        Bundelkhand Your Gateway <br /> to Growth
       </>
     ),
     button: "Join Us Today",
@@ -43,7 +43,7 @@ const images = [
         Empowering Businesses <br /> in Bundelkhand
       </>
     ),
-    button: "Join Us Today",
+    button: "Join Growth Movement",
     link: "/membership",
   },
   {
@@ -53,7 +53,7 @@ const images = [
         Networking for Growth <br /> & Innovation
       </>
     ),
-    button: "Become a Member",
+    button: "Connect & Innovate",
     link: "/join-us",
   },
 

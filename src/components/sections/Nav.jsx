@@ -102,8 +102,8 @@ function Nav() {
                 href={link.href}
                 className={`px-3 py-2 rounded-md transition-colors ${
                   pathname === link.href
-                    ? "bg-orange-800 text-white"
-                    : "text-white hover:bg-orange-800 "
+                    ? "bg-white text-orange-500"
+                    : "text-white hover:bg-orange-300 hover:opacity-100"
                 }`}
               >
                 {link.label}

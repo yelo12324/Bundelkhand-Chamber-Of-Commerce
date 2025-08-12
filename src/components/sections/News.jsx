@@ -3,15 +3,14 @@ import React from "react";
 import "./news.css";
 
 const newsItems = [
-  { src: "/Newz1.png" },
-  { src: "/Newz2.png" },
-  { src: "/Newz3.png" },
-  { src: "/Newz4.png" },
-  { src: "/Newz6.jpeg" },
-  { src: "/Newz7.jpeg" },
-  { src: "/Newz8.jpeg" },
-  { src: "/Newz9.jpeg" },
-  // { src: "/Newz10.jpeg" },
+  { src: "/Newz1.png", desc: "Honourable Minister of State for Industry Respected Shri Bhanu Pratap Verma Ji" },
+  { src: "/Newz2.png", desc: "Ground Breaking Ceremony of Invest in UP" },
+  { src: "/Newz3.png", desc: "Honouring our Divisional Commissioner for his contribution towards development of Bundelkhand" },
+  { src: "/Newz4.png", desc: "Corona Vaccination Drive at Bijauli, Jhansi" },
+  { src: "/Newz6.jpeg", desc: "Felicitating GBC Ready Investors at Jhansi" },
+  { src: "/Newz7.jpeg", desc: "Felicitating GBC Ready Investors at Jhansi" },
+  { src: "/Newz8.jpeg", desc: "Bundelkhand Investor Summit at Jhansi" },
+  { src: "/Newz9.jpeg", desc: "Bundelkhand Investor Summit at Jhansi" },
 ];
 
 export default function News() {
@@ -24,11 +23,10 @@ export default function News() {
         </div>
       </div>
 
-      {/* Mobile Layout: All news stacked */}
+      {/* Mobile Layout */}
       <div className="flex flex-col gap-6 lg:hidden">
-        {/* First 2 news cards */}
         {newsItems.slice(0, 4).map((item, i) => (
-          <NewsCard key={i} img={item.src} />
+          <NewsCard key={i} img={item.src} desc={item.desc} />
         ))}
 
         {/* Main News */}
@@ -38,69 +36,62 @@ export default function News() {
             alt="Main"
             className="w-full rounded-xl border-2 border-gray-300 mb-3"
           />
-          <h2 className="text-[22px] font-extrabold text-black mb-2">
-            Jhansi To Become Industrial Hub
+          <h2 className="hidden text-[22px] font-extrabold text-black mb-2">
+            Industrial Development Meet at Jhansi - Honourable Member of Parliament Shri Anurag Sharma Ji
           </h2>
           <p className="text-[14px] text-gray-700 leading-relaxed">
-            The Bundelkhand Industrial Development Authority (BIDA) is acquiring
-            ~18,000 acres in Jhansi as part of a larger 65,000-acre project to
-            establish a Noida-style industrial city.
+            An industrial development meet organized by Bundelkhand Chamber Of Commerce and Industry was held at Jhansi. The meet was attended by Honourable Member of Parliament Shri Anurag Sharma Ji.
           </p>
         </div>
 
-        {/* Last 2 news cards */}
         {newsItems.slice(4).map((item, i) => (
-          <NewsCard key={i + 2} img={item.src} />
+          <NewsCard key={i + 4} img={item.src} desc={item.desc} />
         ))}
       </div>
 
-      {/* Desktop Layout: Scroll columns */}
+      {/* Desktop Layout */}
       <div className="hidden lg:flex flex-row gap-6 h-[90vh] overflow-hidden">
-        {/* Left News (Scroll) */}
+        {/* Left Scroll */}
         <div className="w-1/4 overflow-hidden h-full">
           <div className="scroll-container h-full">
             <div className="scroll-content">
               {[...newsItems.slice(0, 4), ...newsItems.slice(0, 4)].map((item, i) => (
-                <NewsCard key={i} img={item.src} />
+                <NewsCard key={i} img={item.src} desc={item.desc} />
               ))}
             </div>
           </div>
         </div>
 
         {/* Main News */}
-       <div className="w-1/2 text-center border-x-4 border-black px-8 py-8 overflow-y-hidden no-scrollbar">
-         <img
-           src="/Newz5.png"
-           alt="Main"
-           className="w-full rounded-xl border-2 border-gray-300 mb-4"
-         />
-         <h2 className="text-[42px] font-extrabold text-black mb-3">
-           Jhansi To Become Industrial Hub
-         </h2>
-         <p className="text-[20px] text-gray-700 leading-relaxed">
-           The Bundelkhand Industrial Development Authority (BIDA) is acquiring
-           ~18,000 acres in Jhansi as part of a larger 65,000-acre project to
-           establish a Noida-style industrial city.
-         </p>
-       
-         <style jsx>{`
-           .no-scrollbar::-webkit-scrollbar {
-             display: none;
-           }
-           .no-scrollbar {
-             -ms-overflow-style: none; /* IE/Edge */
-             scrollbar-width: none; /* Firefox */
-           }
-         `}</style>
-       </div>
+        <div className="w-1/2 text-center border-x-4 border-black px-8 py-8 overflow-y-hidden no-scrollbar">
+          <img
+            src="/Newz5.png"
+            alt="Main"
+            className="w-full rounded-xl border-2 border-gray-300 mb-4"
+          />
+          <h2 className="text-[22px] font-extrabold text-black mb-2">
+            Industrial Development Meet at Jhansi - Honourable Member of Parliament Shri Anurag Sharma Ji
+          </h2>
+          <p className="text-[14px] text-gray-700 leading-relaxed">
+            An industrial development meet organized by Bundelkhand Chamber Of Commerce and Industry was held at Jhansi. The meet was attended by Honourable Member of Parliament Shri Anurag Sharma Ji.
+          </p>
+          <style jsx>{`
+            .no-scrollbar::-webkit-scrollbar {
+              display: none;
+            }
+            .no-scrollbar {
+              -ms-overflow-style: none;
+              scrollbar-width: none;
+            }
+          `}</style>
+        </div>
 
-
-        {/* Right News (Scroll) */}
+        {/* Right Scroll */}
         <div className="w-1/4 overflow-hidden h-full">
           <div className="scroll-container h-full">
             <div className="scroll-content">
               {[...newsItems.slice(4), ...newsItems.slice(4)].map((item, i) => (
-                <NewsCard key={i + 2} img={item.src} />
+                <NewsCard key={i + 8} img={item.src} desc={item.desc} />
               ))}
             </div>
           </div>
@@ -110,7 +101,7 @@ export default function News() {
   );
 }
 
-function NewsCard({ img }) {
+function NewsCard({ img, desc }) {
   return (
     <div className="text-left mb-4 sm:mb-6 px-1">
       <img
@@ -118,12 +109,8 @@ function NewsCard({ img }) {
         alt="news"
         className="w-full rounded-xl border-2 border-gray-300 mb-2"
       />
-      <h3 className="text-[18px] sm:text-[20px] md:text-[24px] font-bold text-black leading-tight mb-1">
-        Jhansi To Become Industrial Hub
-      </h3>
       <p className="text-[14px] md:text-[14px] text-gray-700 leading-snug">
-        The Bundelkhand Industrial Development Authority (BIDA) is acquiring
-        ~18,000 acres in Jhansi to build a Noida-style industrial city.
+        {desc}
       </p>
     </div>
   );
