@@ -1,3 +1,16 @@
+export async function generateStaticParams() {
+  // Match keys from your serviceData object
+  const slugs = [
+    'visa-recommendation',
+    'investment-matchmaking',
+    'business-recommendation',
+    'economic-growth',
+  ];
+
+  return slugs.map(slug => ({ slug }));
+}
+
+
 import Footer from "@/components/sections/Footer";
 import Nav from "@/components/sections/Nav";
 import Image from "next/image";
