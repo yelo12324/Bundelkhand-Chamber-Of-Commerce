@@ -95,6 +95,7 @@ export default function Services() {
                 fill
                 className="object-cover"
                 priority
+                unoptimized
               />
             </motion.div>
           )}
@@ -145,6 +146,7 @@ export default function Services() {
                 alt={`Service ${service.id}`}
                 fill
                 className="object-cover transition-transform duration-300 "
+                unoptimized
               />
 
               {isActive && (

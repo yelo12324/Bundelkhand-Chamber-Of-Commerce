@@ -83,6 +83,7 @@ export default function HowWeWork3D() {
                       width={140}
                       height={140}
                       className="object-contain "
+                      unoptimized
                     />
                   </div>
                 </CardItem>

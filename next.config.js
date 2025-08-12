@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: 'export',
+module.exports = {
+  output: 'export',  // for Next.js 13+ static export mode
+  images: {
+    unoptimized: true,  // disables image optimization, uses normal img tags
+  },
 };
-
-export default nextConfig;

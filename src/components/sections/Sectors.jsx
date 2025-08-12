@@ -62,6 +62,7 @@ export default function Sectors() {
       fill
       className="object-contain"
       priority
+      unoptimized
     />
   </div>
   <div className="absolute left-[-5rem] top-[1rem] opacity-50 z-0 pointer-events-none rotate-[250deg]">
@@ -72,6 +73,7 @@ export default function Sectors() {
       height={300}  // set custom height
       className="object-contain"
       priority
+      unoptimized
     />
   </div>
 
@@ -140,6 +142,7 @@ function SectorCard({ sector, index }) {
                 alt={sector.title}
                 fill
                 className="object-cover"
+                unoptimized
               />
             </motion.div>
           ) : (
@@ -180,6 +183,7 @@ function SectorCard({ sector, index }) {
                 alt={sector.title}
                 fill
                 className="object-cover"
+                unoptimized
               />
             </motion.div>
           ) : (
