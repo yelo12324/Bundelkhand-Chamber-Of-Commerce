@@ -27,9 +27,9 @@ const app = express();
 
 // Configure CORS to allow credentials and specify the origin
 app.use(cors({
-  origin: ["https://backend-bcoc.onrender.com" , "http://localhost:3000","https://bundelkhandchamberofcommerce.com/" ], // Your Next.js app's origin
-  methods: ["GET", "POST"],
-  allowedHeaders: ["Content-Type"],
+  origin: ["https://backend-bcoc.onrender.com" , "http://localhost:3000","https://bundelkhandchamberofcommerce.com" ], // Your Next.js app's origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],    
+ allowedHeaders: ["Content-Type", "Authorization", "Accept", "Origin", "X-Requested-With"],
   credentials: true
 }));
 
