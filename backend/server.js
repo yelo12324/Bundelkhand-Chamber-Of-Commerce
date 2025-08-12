@@ -27,7 +27,7 @@ const app = express();
 
 // Configure CORS to allow credentials and specify the origin
 app.use(cors({
-  origin: ["http://localhost:3000" , "http://localhost:3001" ], // Your Next.js app's origin
+  origin: ["https://backend-bcoc.onrender.com" , "http://localhost:3000","https://bundelkhandchamberofcommerce.com/" ], // Your Next.js app's origin
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"],
   credentials: true
@@ -64,6 +64,9 @@ function readExcelFile(fileName) {
 
 const dirname = "C://Users//hp//Desktop//BCCI-main" ;
 
+app.get('/', (req,res)=>{
+  res.send('Hello im Running !! ')
+})
 app.get('/signup', (req, res) => {
   res.send('This is the backend. Use POST /signup to register.');
 });
@@ -370,7 +373,7 @@ app.post('/memberZone/business', (req, res) => {
 
 
 // ---------- START SERVER ----------
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`✅ Server running on http://localhost:${PORT}`);
+  console.log(`✅ Server running on ${PORT}`);
 });

@@ -19,7 +19,7 @@ export default function Page() {
   // ------------------- fetch nominated members --------------------
 
 useEffect(() => {
-  fetch("http://localhost:5000/memberZone/nominee")
+  fetch("https://backend-bcoc.onrender.com/memberZone/nominee")
     .then(res => res.json())
     .then(rawData => {
       const formatted = rawData.map((row, index) => {
@@ -40,7 +40,7 @@ useEffect(() => {
 
   // ---------------- Fetch service members -------------
   useEffect(() => {
-    fetch("http://localhost:5000/memberZone/service")
+    fetch("https://backend-bcoc.onrender.com/memberZone/service")
       .then(res => res.json())
       .then(rawData => {
         const formatted = rawData.map((row, index) => ({
@@ -57,7 +57,7 @@ useEffect(() => {
   // ----------------- Fetch industry members ---------------
 
   useEffect(() => {
-    fetch("http://localhost:5000/memberZone/industry")
+    fetch("https://backend-bcoc.onrender.com/memberZone/industry")
       .then(res => res.json())
       .then(rawData => {
         const formatted = rawData.map((row, index) => ({
@@ -74,7 +74,7 @@ useEffect(() => {
   // ----------- Fetch business members --------------
 
   useEffect(() => {
-    fetch("http://localhost:5000/memberZone/business")
+    fetch("https://backend-bcoc.onrender.com/memberZone/business")
       .then(res => res.json())
       .then(rawData => {
         const formatted = rawData.map((row, index) => ({
