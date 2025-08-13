@@ -28,8 +28,8 @@ const app = express();
 // Configure CORS to allow credentials and specify the origin
 app.use(cors({
   origin: ["https://backend-bcoc.onrender.com" , "http://localhost:3000","https://bundelkhandchamberofcommerce.com/" ], // Your Next.js app's origin
-  methods: ["GET", "POST"],
-  allowedHeaders: ["Content-Type"],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],    
+ allowedHeaders: ["Content-Type", "Authorization", "Accept", "Origin", "X-Requested-With"],
   credentials: true
 }));
 
@@ -130,6 +130,12 @@ app.post("/signup", async (req, res) => {
     };
 
     res.status(201).json({ message: "User registered successfully", user: req.session.user });
+      
+    return res.status(200).json({
+      message: "Signup successful",
+      user: req.session.user,
+      redirectUrl: "/"
+    });
 
   } catch (error) {
     console.error("Signup error:", error);

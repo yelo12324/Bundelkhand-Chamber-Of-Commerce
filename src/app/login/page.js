@@ -17,14 +17,6 @@ export default function LoginPage() {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-//     // -------------ALERT-----------
-//   const [alert, setAlert] = useState({ message: '', type: '', visible: false });
-
-// const showAlert = (message, type = 'success') => {
-//   setAlert({ message, type, visible: true });
-//   setTimeout(() => setAlert({ message: '', type: '', visible: false }), 3000);
-// };
-// ----------ALERT END --------------
 
 
   const handleSubmit = async (e) => {
@@ -46,7 +38,7 @@ export default function LoginPage() {
   toast.success("Login successful!");
   setTimeout(() => {
     window.location.href = data.redirectUrl || "/";
-  }, 1000);
+  }, 800);
 }
  else {
       toast.error(data.message || 'Login failed');
@@ -72,13 +64,6 @@ export default function LoginPage() {
 
 
       <form onSubmit={handleSubmit}> 
-       {/* -----------------ALERT-------------------- */}
-                {/* {alert.visible && (     
-                 <div className={`custom-alert ${alert.type}`}>
-                 {alert.message}
-               </div>
-                )} */}
-        {/* --------ALERT END ------ */}
 
         <div className="container">
           <div className="left">

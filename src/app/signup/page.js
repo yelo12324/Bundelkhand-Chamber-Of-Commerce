@@ -63,10 +63,14 @@ export default function SignupPage() {
     if (res.ok) {
       toast.success('User registered successfully!');
       setFormData({ name: '', email: '', password: '', confirmPassword: '' });
+        setTimeout(() => {
+    window.location.href = data.redirectUrl || "/";
+  }, 800);
     } else {
       toast.error(data.message || 'Signup failed');
     }
   } catch (err) {
+    console.error("Signup error:", err);
     toast.error(`Failed to connect: ${err.message}`);
   }
 };
