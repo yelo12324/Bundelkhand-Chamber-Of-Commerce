@@ -84,6 +84,7 @@ function Page() {
     { name: <>Rakesh Baghel</>, img: "/rakesh.jpg" },
     { name: <>Bishan Singh</>, img: "/bishan.jpg" },
     { name: <> Ashok Anandani </>, img: "/photo3.png" },
+        { name: <>Nikhil Bansal </>, img: "/nikhil_bansal.jpg" },
     { name: <> Vivek Bansal </>, img: "/vivek_nom.jpg" },
     { name: <>Rahul Richariya</>, img: "/rahul.jpg" },
     { name: <>Rajeev Babbar</>, img: "/rajeev.jpg" },
