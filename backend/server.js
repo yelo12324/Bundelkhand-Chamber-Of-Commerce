@@ -255,38 +255,38 @@ app.post("/logout", (req, res) => {
 
 // --------------EXCEL -------------------
 
-app.post('/memberZone/nominee', (req, res) => {
-  try {
-    // Absolute path to the Excel file
-    const filePath = path.join(process.cwd(), "public", "excel", "Nominee coc.xlsx");
+// app.post('/memberZone/nominee', (req, res) => {
+//   try {
+//     // Absolute path to the Excel file
+//     const filePath = path.join(process.cwd(), "public", "excel", "Nominee coc.xlsx");
 
-    // Read Excel file
-    const fileBuffer = fs.readFileSync(filePath);
+//     // Read Excel file
+//     const fileBuffer = fs.readFileSync(filePath);
 
-    // Parse Excel
-    const workbook = XLSX.read(fileBuffer, { type: "buffer" });
-    const sheetName = workbook.SheetNames[0];
-    const sheet = workbook.Sheets[sheetName];
+//     // Parse Excel
+//     const workbook = XLSX.read(fileBuffer, { type: "buffer" });
+//     const sheetName = workbook.SheetNames[0];
+//     const sheet = workbook.Sheets[sheetName];
 
-    // Convert to JSON & normalize keys
-    const rawData = XLSX.utils.sheet_to_json(sheet, { defval: "" });
-    const jsonData = rawData.map(row => {
-      const normalized = {};
-      Object.keys(row).forEach(key => {
-        // Trim spaces in keys and collapse multiple spaces
-        normalized[key.trim().replace(/\s+/g, " ")] = row[key];
-      });
-      return normalized;
-    });
+//     // Convert to JSON & normalize keys
+//     const rawData = XLSX.utils.sheet_to_json(sheet, { defval: "" });
+//     const jsonData = rawData.map(row => {
+//       const normalized = {};
+//       Object.keys(row).forEach(key => {
+//         // Trim spaces in keys and collapse multiple spaces
+//         normalized[key.trim().replace(/\s+/g, " ")] = row[key];
+//       });
+//       return normalized;
+//     });
 
-    console.log("Excel columns:", Object.keys(jsonData[0] || {}));
-    res.json(jsonData);
+//     console.log("Excel columns:", Object.keys(jsonData[0] || {}));
+//     res.json(jsonData);
 
-  } catch (error) {
-    console.error("Error reading Excel:", error);
-    res.status(500).json({ error: "Failed to load members" });
-  }
-});
+//   } catch (error) {
+//     console.error("Error reading Excel:", error);
+//     res.status(500).json({ error: "Failed to load members" });
+//   }
+// });
 
 
 app.post('/memberZone/service', (req, res) => {
