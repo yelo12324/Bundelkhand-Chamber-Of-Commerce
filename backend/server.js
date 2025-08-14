@@ -27,7 +27,7 @@ const app = express();
 
 // Configure CORS to allow credentials and specify the origin
 app.use(cors({
-  origin: ["https://backend-bcoc.onrender.com" , "http://localhost:3000","https://bundelkhandchamberofcommerce.com/" ], // Your Next.js app's origin
+  origin: ["https://backend-bcoc.onrender.com" , "http://localhost:3000","https://bundelkhandchamberofcommerce.com" ], // Your Next.js app's origin
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"],
   credentials: true
@@ -94,9 +94,9 @@ app.get('/contact', (req, res) => {
 });
 
 // Routes for each members type
-app.get("/memberZone/nominee", (req, res) => {
-  res.json(readExcelFile("Nominee coc.xlsx"));
-});
+// app.get("/memberZone/nominee", (req, res) => {
+//   res.json(readExcelFile("Nominee coc.xlsx"));
+// });
 
 app.get("/memberZone/service", (req, res) => {
   res.json(readExcelFile("service members.xlsx"));
