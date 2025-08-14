@@ -27,8 +27,8 @@ const app = express();
 
 // Configure CORS to allow credentials and specify the origin
 app.use(cors({
-  origin: ["https://backend-bcoc.onrender.com" , "http://localhost:3000","https://bundelkhandchamberofcommerce.com" ], // Your Next.js app's origin
-  methods: ["GET", "POST"],
+  origin: ["http://localhost:3000","https://bundelkhandchamberofcommerce.com" ], // Your Next.js app's origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ["Content-Type"],
   credentials: true
 }));
@@ -56,11 +56,11 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: true,            // true for HTTPS
-    httpOnly: true,
-    sameSite: "none",        // important for cross-site cookies
-    maxAge: 24 * 60 * 60 * 1000
-  }
+  secure: process.env.NODE_ENV === "production",
+  httpOnly: true,
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  maxAge: 24 * 60 * 60 * 1000
+}
 }));
 
 // -------------------  Helper function to read Excel files---------------------
@@ -143,7 +143,7 @@ app.post("/signup", async (req, res) => {
       email: newUser.email,
     };
 
-    res.status(201).json({ message: "User registered successfully", user: req.session.user });
+    // res.status(201).json({ message: "User registered successfully", user: req.session.user });
       
     return res.status(200).json({
       message: "Signup successful",

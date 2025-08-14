@@ -24,23 +24,23 @@ export default function SignupPage() {
   };
 
   // Animated alert component
-  const CustomAlert = ({ message, isError, onClose }) => (
-    <motion.div
-      initial={{ opacity: 0, y: -50 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -50 }}
-      transition={{ duration: 0.3, ease: 'easeOut' }}
-      className={`fixed top-4 left-1/2 transform -translate-x-1/2 p-4 py-5 rounded-lg shadow-lg z-50 flex items-center gap-4 max-w-md w-full ${isError ? 'bg-red-500' : 'bg-green-500'} text-white`}
-    >
-      <span>{isError ? '❌' : '✅'} {message}</span>
-      <button
-        onClick={onClose}
-        className="ml-auto bg-white text-black px-2 py-1 rounded-full hover:bg-gray-200"
-      >
-        ×
-      </button>
-    </motion.div>
-  );
+  // const CustomAlert = ({ message, isError, onClose }) => (
+  //   <motion.div
+  //     initial={{ opacity: 0, y: -50 }}
+  //     animate={{ opacity: 1, y: 0 }}
+  //     exit={{ opacity: 0, y: -50 }}
+  //     transition={{ duration: 0.3, ease: 'easeOut' }}
+  //     className={`fixed top-4 left-1/2 transform -translate-x-1/2 p-4 py-5 rounded-lg shadow-lg z-50 flex items-center gap-4 max-w-md w-full ${isError ? 'bg-red-500' : 'bg-green-500'} text-white`}
+  //   >
+  //     <span>{isError ? '❌' : '✅'} {message}</span>
+  //     <button
+  //       onClick={onClose}
+  //       className="ml-auto bg-white text-black px-2 py-1 rounded-full hover:bg-gray-200"
+  //     >
+  //       ×
+  //     </button>
+  //   </motion.div>
+  // );
 
   const handleSubmit = async (e) => {
   e.preventDefault();
@@ -95,7 +95,7 @@ export default function SignupPage() {
        <Toaster position="top-center" reverseOrder={false} />
 
       <form onSubmit={handleSubmit}>
-        <AnimatePresence>
+        {/* <AnimatePresence>
           {alert.show && (
             <CustomAlert
               message={alert.message}
@@ -103,7 +103,7 @@ export default function SignupPage() {
               onClose={() => setAlert({ show: false, message: '', isError: false })}
             />
           )}
-        </AnimatePresence>
+        </AnimatePresence> */}
 
         <div className="container">
           <div className="left">
