@@ -6,36 +6,36 @@ import Nav from '@/components/sections/Nav';
 import Footer from '@/components/sections/Footer';
 import { motion } from 'framer-motion';
 
-const tabs = ['Nominated Members', 'Service Members', 'Industry Members', 'Business Members'];
+const tabs = ['Service Members', 'Industry Members', 'Business Members'];
 
 export default function Page() {
-  const [activeTab, setActiveTab] = useState('Nominated Members');
+  const [activeTab, setActiveTab] = useState('Service Members');
   const [isOpen, setIsOpen] = useState(false);
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);             //  nominee
   const [service, setService] = useState([]);
   const [industry, setIndustry] = useState([]);
   const [business, setBusiness] = useState([]);
 
   // ------------------- fetch nominated members --------------------
 
-useEffect(() => {
-  fetch("https://backend-bcoc.onrender.com/memberZone/nominee")
-    .then(res => res.json())
-    .then(rawData => {
-      const formatted = rawData.map((row, index) => {
-        const execKey = Object.keys(row).find(
-          k => k.toLowerCase().includes("executive head")
-        );
-        return {
-          id: row["S. No"] || index + 1,
-          name: row["Name"] || "",
-          executive: execKey ? row[execKey] : ""
-        };
-      });
-      setData(formatted);
-    })
-    .catch(err => console.error("Error loading members:", err));
-}, []);
+// useEffect(() => {
+//   fetch("https://backend-bcoc.onrender.com/memberZone/nominee")
+//     .then(res => res.json())
+//     .then(rawData => {
+//       const formatted = rawData.map((row, index) => {
+//         const execKey = Object.keys(row).find(
+//           k => k.toLowerCase().includes("executive head")
+//         );
+//         return {
+//           id: row["S. No"] || index + 1,
+//           name: row["Name"] || "",
+//           executive: execKey ? row[execKey] : ""
+//         };
+//       });
+//       setData(formatted);
+//     })
+//     .catch(err => console.error("Error loading members:", err));
+// }, []);
 
 
   // ---------------- Fetch service members -------------
@@ -185,7 +185,7 @@ useEffect(() => {
 
         {/* Nominated Member Table */}
 
-        {activeTab === 'Nominated Members' && (
+        {/* {activeTab === 'Nominated Members' && (
           <div className="mt-8 overflow-x-auto shadow-lg rounded-lg border border-gray-200 bg-white animate-fadeIn">
             <table className="min-w-full text-left text-gray-700">
               <thead className="bg-gray-100 text-gray-800 uppercase text-sm">
@@ -213,7 +213,7 @@ useEffect(() => {
               </tbody>
             </table>
           </div>
-        )}
+        )} */}
 
         
 {/* Service Members Table */}
