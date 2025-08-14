@@ -122,7 +122,7 @@ function Footer() {
         {/* Location */}
         <div className="flex flex-col items-center lg:items-start text-white ">
           <h2 className="text-xl font-semibold mb-3">How To Find Us</h2>
-          <p className="text-lg">Hankul Packwell Pvt Ltd.</p>
+          <p className="text-lg">Hankhul Packwell Pvt Ltd.</p>
           <p className="text-lg">Pal colony lane.</p>
           <p className="text-lg">Gwalior Road.</p>
           <p className="text-lg"> Jhansi 284003.</p>

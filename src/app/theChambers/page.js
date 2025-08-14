@@ -37,7 +37,7 @@ function Page() {
         <>
           Amit Singh (अमित सिंह) <br />
           <hr className="my-1 border-white" />
-          Joint Secretary <br /> Maa Pitambra Industries
+          Joint Secretary <br /> MD Pitambra Industries
         </>
       ),
       img: "/ob3amit.png",
@@ -57,7 +57,6 @@ function Page() {
   const executive = [
     { name: <>Dheeraj Khullar</>, img: "/obdheeraj.png" },
     { name: <>Pawan Saravgi</>, img: "/ob2pawan.png" },
-    { name: <>Amit Singh</>, img: "/ob3amit.png" },
     { name: <>CA Kapil Khanna</>, img: "/ob4kapil.png" },
     { name: <>Atul Sharma</>, img: "/Atul.png" },
     { name: <>Ajay Sijaria</>, img: "/Ajay.png" },
@@ -77,6 +76,31 @@ function Page() {
     { name: <>Vivek Jain</>, img: "/vivek.jpg" },
     { name: <>Ratnesh Baghel</>, img: "/Ratnesh.png" },
     { name: <>Saurabh Gaida</>, img: "/Saurabh.jpeg" },
+  ];
+  
+  const nominated = [
+    { name: <>Amit Singh</>, img: "/ob3amit.png" },
+    { name: <> Lakhan Lal </>, img: "/photo8.png" },
+    { name: <>Rakesh Baghel</>, img: "/rakesh.jpg" },
+    { name: <>Bishan Singh</>, img: "/bishan.jpg" },
+    { name: <> Ashok Anandani </>, img: "/photo3.png" },
+    { name: <> Vivek Bansal </>, img: "/vivek_nom.jpg" },
+    { name: <>Rahul Richariya</>, img: "/rahul.jpg" },
+    { name: <>Rajeev Babbar</>, img: "/rajeev.jpg" },
+    { name: <> Atul Agarwal </>, img: "/atul_nom.jpg" },
+    { name: <>CA Raman </>, img: "/raman.jpg" },
+    { name: <>Mahesh Agarwal</>, img: "/mahesh.jpg" },
+    { name: <>Alok Kankane</>, img: "/alok.jpg" },
+    { name: <> Sunil Kumar Agarwal </>, img: "/sunil_nom.jpg" },
+    { name: <>CA Jayant Mani</>, img: "/jayant.jpg" },
+    { name: <>Vibhor Gupta</>, img: "/vibhor.jpg" },
+    { name: <>Santosh Suri </>, img: "/photo10.png" },
+    { name: <>Pavitra Khanna </>, img: "/pavitra_nom.jpg" },
+    { name: <> Mukul Kalani </>, img: "/mukul.jpg" },
+    { name: <> Shantanu Agarwal </>, img: "/shantanu.jpg" },
+    // { name: <>Sh Brijesh<br/>Kumar Tripathi</>, img: "/brijesh.png" },
+    // { name: <>Hari Mohan <br/>Bansal</>, img: "/harimohan.jpg" },
+   
   ];
 
   const fadeInProps = {
@@ -229,6 +253,58 @@ function Page() {
                   />
                 </div>
                 <h1 className="text-nowrap text-center text-black transition-transform duration-300 group-hover:scale-110 group-hover:mt-6">
+                  {member.name}
+                </h1>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+
+
+      <div className="relative md:mt-0 -mt-30 mb-20 md:mb-0">
+        <motion.h1
+          {...fadeInProps}
+          className="inline-block md:text-4xl text-2xl w-full font-bold md:font-extrabold text-orange-500 text-center mt-40 md:mb-10 mb-10 after:content-[''] after:block after:h-[5px] after:w-[30%] md:after:w-[15%] after:bg-orange-500 after:mx-auto after:mt-0 md:after:mt-1 after:rounded-full"
+        >
+          BCCI Nominated Board
+        </motion.h1>
+      
+        <div className="relative w-full">
+          {/* Scroll Buttons */}
+          <button
+            onClick={() =>
+              scrollRef.current?.scrollBy({ left: -500, behavior: "smooth" })
+            }
+            className="absolute z-10 top-1/2 left-2 transform -translate-y-1/2 bg-gray-500 p-2 rounded-full shadow-md hover:scale-110 transition"
+          >
+            <ChevronLeft />
+          </button>
+          <button
+            onClick={() =>
+              scrollRef.current?.scrollBy({ left: 500, behavior: "smooth" })
+            }
+            className="absolute z-10 top-1/2 right-2 transform -translate-y-1/2 bg-gray-500 p-2 rounded-full shadow-md hover:scale-110 transition"
+          >
+            <ChevronRight />
+          </button>
+      
+          <div
+            ref={scrollRef}
+            className="flex overflow-x-auto space-x-6 px-6 no-scrollbar scroll-smooth"
+          >
+            {nominated.map((member, index) => (
+              <div key={index} className="flex-shrink-0 group text-wrap">
+                <div className="relative lg:w-64 w-32 lg:h-64 h-32 md:mt-10 mt-0 rounded-full overflow-hidden transform transition-transform duration-300 group-hover:scale-115">
+                  <Image
+                    src={member.img}
+                    alt="executive"
+                    fill
+                    className="object-fit"
+                  />
+                </div>
+                <h1 className="text-center text-black transition-transform duration-300 group-hover:scale-110 group-hover:mt-6">
                   {member.name}
                 </h1>
               </div>

@@ -82,7 +82,7 @@ const sectors = [
         image:"/entertainment.jpg",
     },
     {
-        name: "Jewellary & Lifestyle",
+        name: "Jewellery & Lifestyle",
         image:"/jewellary-lifestyle.jpg",
     },
     {

@@ -106,7 +106,7 @@ useEffect(() => {
       <div className="px-10">
         <div
           className="hidden w-full min-h-[400px] lg:flex flex-col items-center rounded-2xl justify-center bg-cover bg-center"
-          style={{ backgroundImage: "url('/memberZone.png')" }}
+          style={{ backgroundImage: "url('/memberZone.jpg')" }}
         ></div>
 
         <motion.h1

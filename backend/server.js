@@ -28,8 +28,8 @@ const app = express();
 // Configure CORS to allow credentials and specify the origin
 app.use(cors({
   origin: ["https://backend-bcoc.onrender.com" , "http://localhost:3000","https://bundelkhandchamberofcommerce.com/" ], // Your Next.js app's origin
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],    
- allowedHeaders: ["Content-Type", "Authorization", "Accept", "Origin", "X-Requested-With"],
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"],
   credentials: true
 }));
 
@@ -39,14 +39,27 @@ app.use(morgan("dev"));
 
 // -------------- SESSION SETUP -----------------
 
+// app.use(session({
+//   secret: process.env.SESSION_SECRET, // use long random secret in .env
+//   resave: false,
+//   saveUninitialized: false,
+//   cookie: {
+//     secure: false, // true if using HTTPS
+//     httpOnly: true,
+//     maxAge: 24 * 60 * 60 * 1000 // 1 day
+//   }
+// }));
+
+
 app.use(session({
-  secret: process.env.SESSION_SECRET, // use long random secret in .env
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: false, // true if using HTTPS
+    secure: true,            // true for HTTPS
     httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000 // 1 day
+    sameSite: "none",        // important for cross-site cookies
+    maxAge: 24 * 60 * 60 * 1000
   }
 }));
 
@@ -67,6 +80,7 @@ const dirname = "C://Users//hp//Desktop//BCCI-main" ;
 app.get('/', (req,res)=>{
   res.send('Hello im Running !! ')
 })
+
 app.get('/signup', (req, res) => {
   res.send('This is the backend. Use POST /signup to register.');
 });
@@ -229,8 +243,9 @@ app.get("/me", (req, res) => {
   }
 });
 
+
 // ---------- LOGOUT ----------
-app.post("/api/logout", (req, res) => {
+app.post("/logout", (req, res) => {
   req.session.destroy(() => {
     res.clearCookie("connect.sid");
     res.json({ message: "Logged out successfully" });
@@ -383,3 +398,23 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`✅ Server running on ${PORT}`);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//DEVELOPED BY - ARPIT SHUKLA, PALLAVI PATEL

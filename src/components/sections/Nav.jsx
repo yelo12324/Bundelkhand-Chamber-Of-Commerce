@@ -1,18 +1,17 @@
 'use client';
 import React, { useState, useEffect } from "react";
-import { HiOutlineMenuAlt3, HiOutlineX } from "react-icons/hi";
-import { RxHamburgerMenu } from "react-icons/rx";  // Add this line
+import { HiOutlineX } from "react-icons/hi";
+import { RxHamburgerMenu } from "react-icons/rx";
 import { AnimatePresence, motion } from "framer-motion";
-import Link from "next/link";  // Assuming you want to use Link for navigation
+import Link from "next/link";
 import { User } from "lucide-react";
-import { usePathname } from "next/navigation"; // add at the top
-
- // Assuming Nav is in the same directory
+import { usePathname } from "next/navigation";
 
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const pathname = usePathname(); // get current path
+  const [username, setUsername] = useState(null);
+  const pathname = usePathname();
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -23,17 +22,36 @@ function Nav() {
     { href: "/media", label: "Media" }
   ];
 
-  useEffect(() => {
-    if (menuOpen) {
-      // Disable scrolling
-      document.body.style.overflow = "hidden";
-    } else {
-      // Re-enable scrolling
-      document.body.style.overflow = "";
-    }
+  // useEffect(() => {
+  //   fetch("https://backend-bcoc.onrender.com/me", {
+  //      method: "GET",
+  //     credentials: "include",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data.authenticated) {
+  //         setUsername(data.user.name);
+  //       }
+  //     })
+  //     .catch((err) => console.error("Session check error:", err));
+  // }, []);
 
+  // const handleLogout = () => {
+  //   fetch("/logout", {
+  //     method: "POST",
+  //     credentials: "include",
+  //   })
+  //     .then((res) => res.json())
+  //     .then(() => {
+  //       setUsername(null);
+  //       window.location.href = "/";
+  //     })
+  //     .catch((err) => console.error("Logout error:", err));
+  // };
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
-      // Cleanup on unmount
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
@@ -47,21 +65,17 @@ function Nav() {
           <a href="/"><img src="/logo.png" alt="logo" className="w-full h-full object-contain" /></a>
         </div>
 
-        {/* Title (next to logo, on larger screens only) */}
+        {/* Title */}
         <div className="sm:block ml-2 flex-1 text-nowrap">
           <h1 className="uppercase font-bold text-black text-sm md:text-xl lg:text-3xl md:leading-2 lg:leading-5">
             bundelkhand chamber <br />
-            <span className="text-blue-400 text-sm md:mt-[-5] sm:text-base md:text-lg">
+            <span className="text-blue-400 text-sm sm:text-base md:text-lg">
               of commerce & industry
             </span>
-            {/* <br />
-            <span className="text-black-400 text-sm md:mt-[-5] sm:text-base md:text-lg">
-              Since 1988
-            </span> */}
           </h1>
         </div>
 
-        {/* Center Image (Emblem or other visual) */}
+        {/* Center Image */}
         <div className="hidden flex-1 md:flex justify-center">
           <img
             src="/nav1.png"
@@ -69,7 +83,6 @@ function Nav() {
             className="w-[60%] h-full absolute xl:bottom-[-1.8rem] xl:left-[20rem] md:bottom-[-3.2rem] md:left-[14rem] md:w-[50%] lg:w-[60%] lg:bottom-[-3.2rem] lg:left-[13rem] z-0 object-contain"
           />
         </div>
-  
 
         {/* Right Statue */}
         <div className="hidden md:block w-[80px] sm:w-[100px] md:w-[130px] lg:w-[160px]">
@@ -88,30 +101,27 @@ function Nav() {
 
       {/* Orange Curve Strip */}
       <div className="px-4 sm:px-10">
-        <div className="w-full h-[14px] bg-[#F15A24] rounded-tl-3xl z-1 rounded-br-3xl md:mb-5 mb-[-8px]"></div>
+        <div className="w-full h-[14px] bg-[#F15A24] rounded-tl-3xl rounded-br-3xl md:mb-5 mb-[-8px]"></div>
       </div>
-
 
       <div className="px-10">
         {/* Desktop Nav */}
         <div className="hidden md:flex w-full bg-[#F15A24] py-2 rounded-tl-3xl rounded-br-3xl px-4 sm:px-10">
           <ul className="flex lg:justify-around items-center w-full uppercase lg:font-semibold md:justify-between text-sm sm:text-base">
             {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`px-3 py-2 rounded-md transition-colors ${
-                  pathname === link.href
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={`px-3 py-2 rounded-md transition-colors ${pathname === link.href
                     ? "bg-white text-orange-500"
                     : "text-white hover:bg-orange-300 hover:opacity-100"
-                }`}
-              >
-                {link.label}
-              </Link>
+                    }`}
+                >
+                  {link.label}
+                </Link>
+              </li>
             ))}
-  
-            {/* User menu remains as before */}
-            <div
+            <li
               className="relative inline-block text-left"
               onMouseEnter={() => setIsOpen(true)}
               onMouseLeave={() => setIsOpen(false)}
@@ -121,52 +131,77 @@ function Nav() {
               </button>
               {isOpen && (
                 <div className="absolute right-0 w-40 bg-gray-800 rounded-lg shadow-lg py-2 z-50">
-                  <Link
-                    href="/signup"
-                    className="block px-4 py-2 text-white hover:bg-gray-700 transition"
-                  >
-                    Signup
-                  </Link>
-                  <Link
-                    href="/login"
-                    className="block px-4 py-2 text-white hover:bg-gray-700 transition"
-                  >
-                    Login
-                  </Link>
+                  {username ? (
+                    <>
+                      <div className="px-4 py-2 text-white border-b border-gray-600">
+                        {username}
+                      </div>
+                      {/* <button
+                        onClick={handleLogout}
+                        className="block w-full text-left px-4 py-2 text-white hover:bg-gray-700 transition"
+                      >
+                        Logout
+                      </button> */}
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        href="/signup"
+                        className="block px-4 py-2 text-white hover:bg-gray-700 transition"
+                      >
+                        Signup
+                      </Link>
+                      <Link
+                        href="/login"
+                        className="block px-4 py-2 text-white hover:bg-gray-700 transition"
+                      >
+                        Login
+                      </Link>
+                    </>
+                  )}
                 </div>
               )}
-            </div>
+            </li>
           </ul>
         </div>
       </div>
 
       {/* Mobile Nav */}
       <AnimatePresence>
-       <div className="px-4"> 
-        {menuOpen && (
-          <motion.div
-            key="mobile-nav"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="md:hidden w-full bg-[#F15A24] rounded-tl-3xl rounded-br-3xl px-4 mt-5 z-40 overflow-hidden"
-          >
-            <ul className="flex flex-col gap-4 text-white uppercase font-semibold text-sm py-4">
-              <Link href="/theChambers" className="border-b border-white border-b-[1px] pb-1">Home</Link>
-              <Link href="/theChambers" className="border-b border-white border-b-[1px] pb-2 mt-[-5px]" >The Chamber</Link>
-              <Link href="/servicesPage" className="border-b border-white border-b-[1px] pb-2 mt-[-5px]" >Services</Link>
-              <Link href="/sectors" className="border-b border-white border-b-[1px] pb-2 mt-[-5px]">Sectors</Link>
-              <Link href="/memberZone" className="border-b border-white border-b-[1px] pb-2 mt-[-5px]">Member&rsquo;s Zone</Link>
-              <Link href="/media" className="border-b border-white border-b-[1px] pb-2 mt-[-5px]">Media</Link>
-              <div className="flex justify-around">
-                <Link href="/login" className="mt-[-5px]">Login</Link>
-                <Link href="/signup" className="mt-[-5px]">Signup</Link>      
-              </div> 
-            </ul>
-          </motion.div>
-        )}
-       </div> 
+        <div className="px-4">
+          {menuOpen && (
+            <motion.div
+              key="mobile-nav"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="md:hidden w-full bg-[#F15A24] rounded-tl-3xl rounded-br-3xl px-4 mt-5 z-40 overflow-hidden"
+            >
+              <ul className="flex flex-col gap-4 text-white uppercase font-semibold text-sm py-6">
+                <Link href="/" className="border-b border-white pb-1">Home</Link>
+                <Link href="/theChambers" className="border-b border-white pb-2 mt-[-5px]">The Chamber</Link>
+                <Link href="/servicesPage" className="border-b border-white pb-2 mt-[-5px]">Services</Link>
+                <Link href="/sectors" className="border-b border-white pb-2 mt-[-5px]">Sectors</Link>
+                <Link href="/memberZone" className="border-b border-white pb-2 mt-[-5px]">Member’s Zone</Link>
+                <Link href="/media" className="border-b border-white pb-2 mt-[-5px]">Media</Link>
+                <div className="flex justify-around">
+                  {username ? (
+                    <>
+                      <span>{username}</span>
+                      <button onClick={handleLogout}>Logout</button>
+                    </>
+                  ) : (
+                    <>
+                      <Link href="/login">Login</Link>
+                      <Link href="/signup">Signup</Link>
+                    </>
+                  )}
+                </div>
+              </ul>
+            </motion.div>
+          )}
+        </div>
       </AnimatePresence>
     </div>
   );

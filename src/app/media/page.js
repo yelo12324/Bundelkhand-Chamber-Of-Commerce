@@ -78,7 +78,7 @@ function Page() {
             className="object-cover w-full h-[70%]"
           />
           <div className="bg-orange-500 text-white p-2 text-center font-medium h-[30%] flex items-center justify-center">
-            Hop & hop of Buses
+            Hop & hop off Buses
           </div>
         </div>
       </div>

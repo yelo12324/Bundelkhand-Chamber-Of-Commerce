@@ -55,6 +55,7 @@ export default function SignupPage() {
     const res = await fetch('https://backend-bcoc.onrender.com/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+        credentials: "include",
       body: JSON.stringify({ name, email, password }),
     });
 
