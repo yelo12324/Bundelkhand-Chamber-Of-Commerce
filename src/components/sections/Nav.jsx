@@ -57,19 +57,19 @@ function Nav() {
   }, [menuOpen]);
 
   return (
-    <div className="w-full md:sticky md:top-0 fixed top-0 z-50 bg-white pb-5">
+    <div className="w-full md:sticky md:top-0 fixed top-0 z-50 bg-white pb-1">
       {/* Top Section */}
       <div className="flex justify-between items-center px-4 md:px-10 pt-4 relative">
         {/* Left Logo */}
-        <div className="w-[80px] sm:w-[120px] md:w-[130px]">
+        <div className="w-[80px] sm:w-[120px] md:w-[80px] lg:w-[100px] xl:w-[110px]">
           <a href="/"><img src="/logo.png" alt="logo" className="w-full h-full object-contain" /></a>
         </div>
 
         {/* Title */}
         <div className="sm:block ml-2 flex-1 text-nowrap">
-          <h1 className="uppercase font-bold text-black text-sm md:text-xl lg:text-3xl md:leading-2 lg:leading-5">
+          <h1 className="uppercase font-bold text-black text-sm md:text-lg lg:text-xl md:leading-2 lg:leading-5">
             bundelkhand chamber <br />
-            <span className="text-blue-400 text-sm sm:text-base md:text-lg">
+            <span className="text-blue-400 text-sm sm:text-base md:text-md lg:text-lg">
               of commerce & industry
             </span>
           </h1>
@@ -80,12 +80,12 @@ function Nav() {
           <img
             src="/nav1.png"
             alt="nav1"
-            className="w-[60%] h-full absolute xl:bottom-[-1.8rem] xl:left-[20rem] md:bottom-[-3.2rem] md:left-[14rem] md:w-[50%] lg:w-[60%] lg:bottom-[-3.2rem] lg:left-[13rem] z-0 object-contain"
+            className="w-[60%] h-full absolute xl:bottom-[-1.1rem] xl:left-[26rem] md:bottom-[-3.2rem] md:left-[14rem] md:w-[50%] lg:w-[55%] lg:bottom-[-3.2rem] lg:left-[13rem] z-0 object-contain"
           />
         </div>
 
         {/* Right Statue */}
-        <div className="hidden md:block w-[80px] sm:w-[100px] md:w-[130px] lg:w-[160px]">
+        <div className="hidden md:block w-[80px] sm:w-[100px] md:w-[100px] lg:w-[130px]">
           <img src="/statue.png" alt="statue" className="w-full h-full object-contain" />
         </div>
 
@@ -101,12 +101,12 @@ function Nav() {
 
       {/* Orange Curve Strip */}
       <div className="px-4 sm:px-10">
-        <div className="w-full h-[14px] bg-[#F15A24] rounded-tl-3xl rounded-br-3xl md:mb-5 mb-[-8px]"></div>
+        <div className="w-full h-[14px] bg-[#F15A24] rounded-tl-3xl rounded-br-3xl md:mb-2 mb-[-8px]"></div>
       </div>
 
       <div className="px-10">
         {/* Desktop Nav */}
-        <div className="hidden md:flex w-full bg-[#F15A24] py-2 rounded-tl-3xl rounded-br-3xl px-4 sm:px-10">
+        <div className="hidden md:flex w-full bg-[#F15A24] py-0 rounded-tl-3xl rounded-br-3xl px-4 sm:px-10">
           <ul className="flex lg:justify-around items-center w-full uppercase lg:font-semibold md:justify-between text-sm sm:text-base">
             {navLinks.map((link) => (
               <li key={link.href}>

@@ -84,7 +84,7 @@ function Page() {
     { name: <>Rakesh Baghel</>, img: "/rakesh.jpg" },
     { name: <>Bishan Singh</>, img: "/bishan.jpg" },
     { name: <> Ashok Anandani </>, img: "/photo3.png" },
-        { name: <>Nikhil Bansal </>, img: "/nikhil_bansal.jpg" },
+    { name: <>Nikhil Bansal </>, img: "/nikhil_bansal.jpg" },
     { name: <> Vivek Bansal </>, img: "/vivek_nom.jpg" },
     { name: <>Rahul Richariya</>, img: "/rahul.jpg" },
     { name: <>Rajeev Babbar</>, img: "/rajeev.jpg" },
@@ -134,7 +134,7 @@ function Page() {
       </div>
 
       {/* Title */}
-      <h1 className="hidden md:block text-7xl text-center mt-18 text-orange-500 font-extrabold animate-bounce">
+      <h1 className="hidden md:block text-7xl text-center mt-8 text-orange-500 font-extrabold animate-bounce">
         The Chambers
       </h1>
 

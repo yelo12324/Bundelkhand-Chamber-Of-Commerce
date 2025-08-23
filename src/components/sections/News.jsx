@@ -7,6 +7,10 @@ const newsItems = [
   { src: "/Newz2.png", desc: "Ground Breaking Ceremony of Invest in UP" },
   { src: "/Newz3.png", desc: "Honouring our Divisional Commissioner for his contribution towards development of Bundelkhand" },
   { src: "/Newz4.png", desc: "Corona Vaccination Drive at Bijauli, Jhansi" },
+  { src: "/Newzr1.jpg", desc: "Business meet to discuss wellfare of Bundelkhand" },
+  { src: "/Newzr2.jpg", desc: "MLA Ravi Sharma came to discuss their ideas for development of Bundelkhand" },
+  { src: "/Newzr3.jpg", desc: "All businessmen comes together to support the development of Bundelkhand" },
+  { src: "/Newzr4.jpg", desc: "MLA Anurag Sharma showed us the right path for development of Bundelkhand" },
   { src: "/Newz6.jpeg", desc: "Felicitating GBC Ready Investors at Jhansi" },
   { src: "/Newz7.jpeg", desc: "Felicitating GBC Ready Investors at Jhansi" },
   { src: "/Newz8.jpeg", desc: "Bundelkhand Investor Summit at Jhansi" },
@@ -25,7 +29,7 @@ export default function News() {
 
       {/* Mobile Layout */}
       <div className="flex flex-col gap-6 lg:hidden">
-        {newsItems.slice(0, 4).map((item, i) => (
+        {newsItems.slice(0, 6).map((item, i) => (
           <NewsCard key={i} img={item.src} desc={item.desc} />
         ))}
 
@@ -44,7 +48,7 @@ export default function News() {
           </p>
         </div>
 
-        {newsItems.slice(4).map((item, i) => (
+        {newsItems.slice(6).map((item, i) => (
           <NewsCard key={i + 4} img={item.src} desc={item.desc} />
         ))}
       </div>
@@ -55,7 +59,7 @@ export default function News() {
         <div className="w-1/4 overflow-hidden h-full">
           <div className="scroll-container h-full">
             <div className="scroll-content">
-              {[...newsItems.slice(0, 4), ...newsItems.slice(0, 4)].map((item, i) => (
+              {[...newsItems.slice(0, 6), ...newsItems.slice(0, 6)].map((item, i) => (
                 <NewsCard key={i} img={item.src} desc={item.desc} />
               ))}
             </div>
@@ -90,7 +94,7 @@ export default function News() {
         <div className="w-1/4 overflow-hidden h-full">
           <div className="scroll-container h-full">
             <div className="scroll-content">
-              {[...newsItems.slice(4), ...newsItems.slice(4)].map((item, i) => (
+              {[...newsItems.slice(6), ...newsItems.slice(6)].map((item, i) => (
                 <NewsCard key={i + 8} img={item.src} desc={item.desc} />
               ))}
             </div>
@@ -107,7 +111,7 @@ function NewsCard({ img, desc }) {
       <img
         src={img}
         alt="news"
-        className="w-full rounded-xl border-2 border-gray-300 mb-2"
+        className="w-full h-60 object-cover rounded-xl border-2 border-gray-300 mb-2"
       />
       <p className="text-[14px] md:text-[14px] text-gray-700 leading-snug">
         {desc}

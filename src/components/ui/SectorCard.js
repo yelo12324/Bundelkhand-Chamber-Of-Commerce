@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-export default function SectorCard({ name, image }) {
+export default function SectorCard({ name, image, description }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -23,6 +23,13 @@ export default function SectorCard({ name, image }) {
               objectFit="cover"
               className="rounded-xl bg-white"
             />
+
+            {/* Black overlay with description */}
+            <div className="absolute bottom-0 inset-0 flex items-end justify-center">
+              <p className="text-white text-sm md:text-base lg:text-md font-medium text-center bg-black/60 rounded-lg px-2 py-3">
+                {description}
+              </p>
+            </div>
           </div>
 
           {/* White separator */}

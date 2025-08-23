@@ -78,7 +78,7 @@ export default function Hero() {
       </h1>
 
       <div className="lg:px-20 md:px-10 px-5">
-        <div className="relative w-full md:h-[500px] h-[400px] overflow-hidden mt-10 md:rounded-3xl rounded-sm">
+        <div className="relative w-full md:h-[400px] lg:h-[450px] xl:h-[470px] h-[400px] overflow-hidden mt-4 md:rounded-3xl rounded-sm">
           <AnimatePresence mode="wait">
             <motion.img
               key={images[index].src}

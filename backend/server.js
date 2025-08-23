@@ -65,13 +65,35 @@ app.use(session({
 
 // -------------------  Helper function to read Excel files---------------------
 
-function readExcelFile(fileName) {
+
+// ==================== Helper: Load + Normalize Excel ====================
+function loadExcelOnce(fileName) {
   const filePath = path.join(process.cwd(), "public", "excel", fileName);
-  const workbook = XLSX.readFile(filePath);
-  const sheetName = workbook.SheetNames[0]; // First sheet
-  const sheetData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-  return sheetData;
+
+  // Read once into buffer
+  const fileBuffer = fs.readFileSync(filePath);
+
+  // Parse Excel
+  const workbook = XLSX.read(fileBuffer, { type: "buffer" });
+  const sheetName = workbook.SheetNames[0];
+  const sheet = workbook.Sheets[sheetName];
+
+  // Convert to JSON & normalize keys
+  const rawData = XLSX.utils.sheet_to_json(sheet, { defval: "" });
+  return rawData.map(row => {
+    const normalized = {};
+    Object.keys(row).forEach(key => {
+      normalized[key.trim().replace(/\s+/g, " ")] = row[key];
+    });
+    return normalized;
+  });
 }
+// ==================== Cache at Server Startup ====================
+const cachedData = {
+  service: loadExcelOnce("service members.xlsx"),
+  industry: loadExcelOnce("industry members.xlsx"),
+  business: loadExcelOnce("Business members.xlsx"),
+};
 
 // --------------  PATH OF THE CHAMBER OF COMMERCE ----------
 
@@ -289,109 +311,36 @@ app.post("/logout", (req, res) => {
 // });
 
 
-app.post('/memberZone/service', (req, res) => {
+// ==================== Routes ====================
+app.post("/memberZone/service", (req, res) => {
   try {
-    // Absolute path to the Excel file
-    const filePath = path.join(process.cwd(), "public", "excel", "service members.xlsx");
-
-    // Read Excel file
-    const fileBuffer = fs.readFileSync(filePath);
-
-    // Parse Excel
-    const workbook = XLSX.read(fileBuffer, { type: "buffer" });
-    const sheetName = workbook.SheetNames[0];
-    const sheet = workbook.Sheets[sheetName];
-
-    // Convert to JSON & normalize keys
-    const rawData = XLSX.utils.sheet_to_json(sheet, { defval: "" });
-    const jsonData = rawData.map(row => {
-      const normalized = {};
-      Object.keys(row).forEach(key => {
-        // Trim spaces in keys and collapse multiple spaces
-        normalized[key.trim().replace(/\s+/g, " ")] = row[key];
-      });
-      return normalized;
-    });
-
-    console.log("Excel columns:", Object.keys(jsonData[0] || {}));
-    res.json(jsonData);
-
+    console.log("Excel columns:", Object.keys(cachedData.service[0] || {}));
+    res.json(cachedData.service);
   } catch (error) {
-    console.error("Error reading Excel:", error);
-    res.status(500).json({ error: "Failed to load members" });
+    console.error("Error serving service members:", error);
+    res.status(500).json({ error: "Failed to load service members" });
   }
 });
 
-
-
-app.post('/memberZone/industry', (req, res) => {
+app.post("/memberZone/industry", (req, res) => {
   try {
-    // Absolute path to the Excel file
-    const filePath = path.join(process.cwd(), "public", "excel", "industry members.xlsx");
-
-    // Read Excel file
-    const fileBuffer = fs.readFileSync(filePath);
-
-    // Parse Excel
-    const workbook = XLSX.read(fileBuffer, { type: "buffer" });
-    const sheetName = workbook.SheetNames[0];
-    const sheet = workbook.Sheets[sheetName];
-
-    // Convert to JSON & normalize keys
-    const rawData = XLSX.utils.sheet_to_json(sheet, { defval: "" });
-    const jsonData = rawData.map(row => {
-      const normalized = {};
-      Object.keys(row).forEach(key => {
-        // Trim spaces in keys and collapse multiple spaces
-        normalized[key.trim().replace(/\s+/g, " ")] = row[key];
-      });
-      return normalized;
-    });
-
-    console.log("Excel columns:", Object.keys(jsonData[0] || {}));
-    res.json(jsonData);
-
+    console.log("Excel columns:", Object.keys(cachedData.industry[0] || {}));
+    res.json(cachedData.industry);
   } catch (error) {
-    console.error("Error reading Excel:", error);
-    res.status(500).json({ error: "Failed to load members" });
+    console.error("Error serving industry members:", error);
+    res.status(500).json({ error: "Failed to load industry members" });
   }
 });
 
-
-
-app.post('/memberZone/business', (req, res) => {
+app.post("/memberZone/business", (req, res) => {
   try {
-    // Absolute path to the Excel file
-    const filePath = path.join(process.cwd(), "public", "excel", "Business members.xlsx");
-
-    // Read Excel file
-    const fileBuffer = fs.readFileSync(filePath);
-
-    // Parse Excel
-    const workbook = XLSX.read(fileBuffer, { type: "buffer" });
-    const sheetName = workbook.SheetNames[0];
-    const sheet = workbook.Sheets[sheetName];
-
-    // Convert to JSON & normalize keys
-    const rawData = XLSX.utils.sheet_to_json(sheet, { defval: "" });
-    const jsonData = rawData.map(row => {
-      const normalized = {};
-      Object.keys(row).forEach(key => {
-        // Trim spaces in keys and collapse multiple spaces
-        normalized[key.trim().replace(/\s+/g, " ")] = row[key];
-      });
-      return normalized;
-    });
-
-    console.log("Excel columns:", Object.keys(jsonData[0] || {}));
-    res.json(jsonData);
-
+    console.log("Excel columns:", Object.keys(cachedData.business[0] || {}));
+    res.json(cachedData.business);
   } catch (error) {
-    console.error("Error reading Excel:", error);
-    res.status(500).json({ error: "Failed to load members" });
+    console.error("Error serving business members:", error);
+    res.status(500).json({ error: "Failed to load business members" });
   }
 });
-
 
 // ---------- START SERVER ----------
 const PORT = process.env.PORT || 5000;

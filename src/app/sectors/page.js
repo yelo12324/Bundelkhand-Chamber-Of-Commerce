@@ -35,7 +35,7 @@ function page() {
 
         <motion.h1
           {...fadeInProps}
-          className="inline-block md:text-8xl text-3xl w-full font-bold md:font-extrabold text-orange-500 text-center mt-40 md:mb-10 mb-0 after:content-[''] after:block after:h-[5px] md:after:h-[9px] after:w-[21%] md:after:w-[15%] after:bg-orange-500 after:mx-auto after:mt-0 md:after:mt-0 after:rounded-full"
+          className="inline-block md:text-8xl text-3xl w-full font-bold md:font-extrabold text-orange-500 text-center md:mb-10 mb-0 after:content-[''] after:block after:h-[5px] md:after:h-[9px] after:w-[21%] md:after:w-[15%] after:bg-orange-500 after:mx-auto after:mt-0 md:after:mt-0 after:rounded-full"
         >
           Sectors
         </motion.h1>
@@ -64,14 +64,24 @@ function page() {
             <div className='flex flex-1 flex-col self-start items-start justify-start gap-4'>
               {sectors.map((sector, index) =>
                 index <= 8 ? (
-                  <SectorCard key={index} name={sector.name} image={sector.image} />
+<SectorCard 
+  key={index} 
+  name={sector.name} 
+  image={sector.image} 
+  description={sector.description} 
+/>
                 ) : null
               )}
             </div>
             <div className='flex flex-1 flex-col self-start items-start justify-start gap-4'>
               {sectors.map((sector, index) =>
                 index > 8 && index <= 17 ? (
-                  <SectorCard key={index} name={sector.name} image={sector.image} />
+<SectorCard 
+  key={index} 
+  name={sector.name} 
+  image={sector.image} 
+  description={sector.description} 
+/>
                 ) : null
               )}
             </div>
@@ -88,14 +98,24 @@ function page() {
             <div className='flex flex-1 flex-col self-start items-start justify-start gap-4'>
               {sectors.map((sector, index) =>
                 index > 17 && index <= 26 ? (
-                  <SectorCard key={index} name={sector.name} image={sector.image} />
+<SectorCard 
+  key={index} 
+  name={sector.name} 
+  image={sector.image} 
+  description={sector.description} 
+/>
                 ) : null
               )}
             </div>
             <div className='flex flex-1 flex-col self-start items-start justify-start gap-4'>
               {sectors.map((sector, index) =>
                 index > 26 && index <= 35 ? (
-                  <SectorCard key={index} name={sector.name} image={sector.image} />
+<SectorCard 
+  key={index} 
+  name={sector.name} 
+  image={sector.image} 
+  description={sector.description} 
+/>
                 ) : null
               )}
             </div>

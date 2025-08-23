@@ -55,7 +55,7 @@ function Page() {
         
          <motion.h1
            {...fadeInProps}
-           className="hidden lg:inline-block md:text-7xl text-2xl w-full text-top font-bold md:font-extrabold text-orange-500 text-center mt-10 md:mb-10 mb-10 after:content-[''] after:block after:h-[9px] after:w-[30%] md:after:w-[15%] after:bg-orange-500 after:mx-auto after:mt-0 md:after:mt-1 after:rounded-full"
+           className="hidden lg:inline-block md:text-7xl text-2xl w-full text-top font-bold md:font-extrabold text-orange-500 text-center mt-5 md:mb-10 mb-10 after:content-[''] after:block after:h-[9px] after:w-[30%] md:after:w-[15%] after:bg-orange-500 after:mx-auto after:mt-0 md:after:mt-1 after:rounded-full"
          >
            Services
          </motion.h1>
