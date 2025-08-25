@@ -41,7 +41,7 @@ export default function Page() {
 //       setData(formatted);
 //     })
 //     .catch(err => console.error("Error loading members:", err));
-// }, []);
+// }, []); 
 
 
   // ---------------- Fetch service members -------------
@@ -107,6 +107,7 @@ const handleSubmit = async (e) => {
     department: selected,
     business: e.target.business?.value || "",
   };
+
 
   try {
     const res = await fetch("https://backend-bcoc.onrender.com/memberZone/enrollNow", {

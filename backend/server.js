@@ -67,27 +67,36 @@ app.use(session({
 
 
 // ==================== Helper: Load + Normalize Excel ====================
+
 function loadExcelOnce(fileName) {
-  const filePath = path.join(process.cwd(), "public", "excel", fileName);
+  try {
+    const filePath = path.join(process.cwd(), "public", "excel", fileName);
 
-  // Read once into buffer
-  const fileBuffer = fs.readFileSync(filePath);
+    if (!fs.existsSync(filePath)) {
+      console.error(`❌ Excel file not found: ${filePath}`);
+      return [];
+    }
 
-  // Parse Excel
-  const workbook = XLSX.read(fileBuffer, { type: "buffer" });
-  const sheetName = workbook.SheetNames[0];
-  const sheet = workbook.Sheets[sheetName];
+    const fileBuffer = fs.readFileSync(filePath);
+    const workbook = XLSX.read(fileBuffer, { type: "buffer" });
+    const sheetName = workbook.SheetNames[0];
+    const sheet = workbook.Sheets[sheetName];
 
-  // Convert to JSON & normalize keys
-  const rawData = XLSX.utils.sheet_to_json(sheet, { defval: "" });
-  return rawData.map(row => {
-    const normalized = {};
-    Object.keys(row).forEach(key => {
-      normalized[key.trim().replace(/\s+/g, " ")] = row[key];
+    const rawData = XLSX.utils.sheet_to_json(sheet, { defval: "" });
+    return rawData.map(row => {
+      const normalized = {};
+      Object.keys(row).forEach(key => {
+        normalized[key.trim().replace(/\s+/g, " ")] = row[key];
+      });
+      return normalized;
     });
-    return normalized;
-  });
+  } catch (error) {
+    console.error("❌ Error loading Excel:", error);
+    return [];
+  }
 }
+
+
 // ==================== Cache at Server Startup ====================
 const cachedData = {
   service: loadExcelOnce("service members.xlsx"),
@@ -119,18 +128,30 @@ app.get('/contact', (req, res) => {
 // app.get("/memberZone/nominee", (req, res) => {
 //   res.json(readExcelFile("Nominee coc.xlsx"));
 // });
-
 app.get("/memberZone/service", (req, res) => {
-  res.json(readExcelFile("service members.xlsx"));
+  try {
+    res.json(cachedData.service);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to load service members" });
+  }
 });
 
 app.get("/memberZone/industry", (req, res) => {
-  res.json(readExcelFile("industry members.xlsx"));
+  try {
+    res.json(cachedData.industry);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to load industry members" });
+  }
 });
 
 app.get("/memberZone/business", (req, res) => {
-  res.json(readExcelFile("Business members.xlsx"));
+  try {
+    res.json(cachedData.business);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to load business members" });
+  }
 });
+
 
 app.get("/memberZone/enrollNow", (req, res) => { 
    res.json("ENROLL IS WORKING ...")
@@ -356,19 +377,19 @@ app.post("/memberZone/enrollNow", async(req, res) => {
   }
 
   try {
-    // Transporter (use your SMTP service like Gmail, Outlook, etc.)
+    // Transporter
     let transporter = nodemailer.createTransport({
-      service: "gmail", // or "hotmail" / custom SMTP
+      service: "gmail",
       auth: {
-        user: process.env.EMAIL_USER, // your email
-        pass: process.env.EMAIL_PASS, // your app password (not raw password)
+        user: process.env.EMAIL_USER, 
+        pass: process.env.EMAIL_PASS, 
       },
     });
 
     // Mail options
     let mailOptions = {
-      from: `"Enrollment Form" <${process.env.EMAIL_USER}>`,
-      to: "yourdestination@email.com", // where you want to receive submissions
+      from: "bccijhansi@gmail.com" ,
+      to:  `"Enrollment Form" <${process.env.EMAIL_USER}>` , // where you want to receive submissions
       subject: "New Enrollment Submission",
       html: `
         <h3>New Enrollment Request</h3>
