@@ -8,8 +8,9 @@ const cors = require("cors");
 const morgan = require("morgan");
 const connectDB = require("./config/db");
 const nodemailer = require("nodemailer");
-const XLSX = require("xlsx");
-const fs = require("fs");
+const compression = require('compression');
+// const XLSX = require("xlsx");
+// const fs = require("fs");
 
 // ------------------ SCHEMA  -------------------
 
@@ -23,7 +24,7 @@ connectDB();
 const app = express();
 
 // ------------ MIDDLEWARE ---------------
-
+app.use(compression()); 
 
 // Configure CORS to allow credentials and specify the origin
 app.use(cors({
@@ -67,41 +68,32 @@ app.use(session({
 
 
 // ==================== Helper: Load + Normalize Excel ====================
+// function loadExcelOnce(fileName) {
+//   const filePath = path.join(process.cwd(), "public", "excel", fileName);
 
-function loadExcelOnce(fileName) {
-  try {
-    const filePath = path.join(process.cwd(), "public", "excel", fileName);
+//   // Read once into buffer
+//   const fileBuffer = fs.readFileSync(filePath);
 
-    if (!fs.existsSync(filePath)) {
-      console.error(`❌ Excel file not found: ${filePath}`);
-      return [];
-    }
+//   // Parse Excel
+//   const workbook = XLSX.read(fileBuffer, { type: "buffer" });
+//   const sheetName = workbook.SheetNames[0];
+//   const sheet = workbook.Sheets[sheetName];
 
-    const fileBuffer = fs.readFileSync(filePath);
-    const workbook = XLSX.read(fileBuffer, { type: "buffer" });
-    const sheetName = workbook.SheetNames[0];
-    const sheet = workbook.Sheets[sheetName];
-
-    const rawData = XLSX.utils.sheet_to_json(sheet, { defval: "" });
-    return rawData.map(row => {
-      const normalized = {};
-      Object.keys(row).forEach(key => {
-        normalized[key.trim().replace(/\s+/g, " ")] = row[key];
-      });
-      return normalized;
-    });
-  } catch (error) {
-    console.error("❌ Error loading Excel:", error);
-    return [];
-  }
-}
-
-
+//   // Convert to JSON & normalize keys
+//   const rawData = XLSX.utils.sheet_to_json(sheet, { defval: "" });
+//   return rawData.map(row => {
+//     const normalized = {};
+//     Object.keys(row).forEach(key => {
+//       normalized[key.trim().replace(/\s+/g, " ")] = row[key];
+//     });
+//     return normalized;
+//   });
+// }
 // ==================== Cache at Server Startup ====================
 const cachedData = {
-  service: loadExcelOnce("service members.xlsx"),
-  industry: loadExcelOnce("industry members.xlsx"),
-  business: loadExcelOnce("Business members.xlsx"),
+  service: require("../public/data/service.json"),
+  industry: require("../public/data/industry.json"),
+  business: require("../public/data/business.json"),
 };
 
 // --------------  PATH OF THE CHAMBER OF COMMERCE ----------
@@ -128,30 +120,18 @@ app.get('/contact', (req, res) => {
 // app.get("/memberZone/nominee", (req, res) => {
 //   res.json(readExcelFile("Nominee coc.xlsx"));
 // });
+
 app.get("/memberZone/service", (req, res) => {
-  try {
-    res.json(cachedData.service);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to load service members" });
-  }
+  res.json(readExcelFile("service members.xlsx"));
 });
 
 app.get("/memberZone/industry", (req, res) => {
-  try {
-    res.json(cachedData.industry);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to load industry members" });
-  }
+  res.json(readExcelFile("industry members.xlsx"));
 });
 
 app.get("/memberZone/business", (req, res) => {
-  try {
-    res.json(cachedData.business);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to load business members" });
-  }
+  res.json(readExcelFile("Business members.xlsx"));
 });
-
 
 app.get("/memberZone/enrollNow", (req, res) => { 
    res.json("ENROLL IS WORKING ...")
@@ -336,30 +316,109 @@ app.post("/logout", (req, res) => {
 
 
 // ==================== Routes ====================
-app.post("/memberZone/service", (req, res) => {
+// app.post("/memberZone/service", (req, res) => {
+//   try {
+//     console.log("Excel columns:", Object.keys(cachedData.service[0] || {}));
+//     res.json(cachedData.service);
+//   } catch (error) {
+//     console.error("Error serving service members:", error);
+//     res.status(500).json({ error: "Failed to load service members" });
+//   }
+// });
+
+// app.post("/memberZone/industry", (req, res) => {
+//   try {
+//     console.log("Excel columns:", Object.keys(cachedData.industry[0] || {}));
+//     res.json(cachedData.industry);
+//   } catch (error) {
+//     console.error("Error serving industry members:", error);
+//     res.status(500).json({ error: "Failed to load industry members" });
+//   }
+// });
+
+// app.post("/memberZone/business", (req, res) => {
+//   try {
+//     console.log("Excel columns:", Object.keys(cachedData.business[0] || {}));
+//     res.json(cachedData.business);
+//   } catch (error) {
+//     console.error("Error serving business members:", error);
+//     res.status(500).json({ error: "Failed to load business members" });
+//   }
+// });
+
+// server.js
+
+// ==================== A Helper Function for Pagination ====================
+function getPaginatedData(data, page, limit) {
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+
+  const results = {};
+  const totalItems = data.length;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  if (endIndex < totalItems) {
+    results.next = {
+      page: page + 1,
+      limit: limit,
+    };
+  }
+  
+  if (startIndex > 0) {
+    results.previous = {
+      page: page - 1,
+      limit: limit,
+    };
+  }
+
+  results.data = data.slice(startIndex, endIndex);
+  results.totalItems = totalItems;
+  results.totalPages = totalPages;
+  results.currentPage = page;
+
+  return results;
+}
+
+
+// ==================== Updated Paginated Routes ====================
+
+app.get("/memberZone/service", (req, res) => {
   try {
-    console.log("Excel columns:", Object.keys(cachedData.service[0] || {}));
-    res.json(cachedData.service);
+    // Get page and limit from query params, with defaults
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20; // Show 20 items per page by default
+
+    const paginatedResults = getPaginatedData(cachedData.service, page, limit);
+    res.json(paginatedResults);
+
   } catch (error) {
     console.error("Error serving service members:", error);
     res.status(500).json({ error: "Failed to load service members" });
   }
 });
 
-app.post("/memberZone/industry", (req, res) => {
+app.get("/memberZone/industry", (req, res) => {
   try {
-    console.log("Excel columns:", Object.keys(cachedData.industry[0] || {}));
-    res.json(cachedData.industry);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20;
+    
+    const paginatedResults = getPaginatedData(cachedData.industry, page, limit);
+    res.json(paginatedResults);
+
   } catch (error) {
     console.error("Error serving industry members:", error);
     res.status(500).json({ error: "Failed to load industry members" });
   }
 });
 
-app.post("/memberZone/business", (req, res) => {
+app.get("/memberZone/business", (req, res) => {
   try {
-    console.log("Excel columns:", Object.keys(cachedData.business[0] || {}));
-    res.json(cachedData.business);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20;
+
+    const paginatedResults = getPaginatedData(cachedData.business, page, limit);
+    res.json(paginatedResults);
+    
   } catch (error) {
     console.error("Error serving business members:", error);
     res.status(500).json({ error: "Failed to load business members" });
@@ -370,7 +429,7 @@ app.post("/memberZone/business", (req, res) => {
 
 app.post("/memberZone/enrollNow", async(req, res) => {
 
- const { name, email } = req.body;
+ const { name, email,mobile,  } = req.body;
 
   if (!name || !email) {
     return res.status(400).json({ error: "Name and Email are required!" });
@@ -409,6 +468,7 @@ app.post("/memberZone/enrollNow", async(req, res) => {
 
 });
 
+
 // ---------- START SERVER ----------
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
@@ -418,7 +478,9 @@ app.listen(PORT, () => {
 
 
 
-
+// ------------------------------ DEVELOPED BY --------------------------------------
+// ARPIT SHUKLA ( fronted developer )
+// PALLAVI PATEL ( backend developer )
 
 
 
