@@ -9,8 +9,14 @@ import { useRef } from "react";
 
 
 function Page() {
+<<<<<<< HEAD
   const scrollRef = useRef(null);
 
+=======
+  const executiveRef = useRef(null); 
+  const nominatedRef = useRef(null);
+  
+>>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
   const members = [
     {
       name: (
@@ -134,7 +140,11 @@ function Page() {
       </div>
 
       {/* Title */}
+<<<<<<< HEAD
       <h1 className="hidden md:block text-7xl text-center mt-8 text-orange-500 font-extrabold animate-bounce">
+=======
+      <h1 className="hidden md:block text-7xl text-center mt-10 text-orange-500 font-extrabold animate-bounce">
+>>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
         The Chambers
       </h1>
 
@@ -154,7 +164,11 @@ function Page() {
         {/* Office Bearers */}
         <motion.h1
           {...fadeInProps}
+<<<<<<< HEAD
           className="inline-block md:text-4xl text-2xl w-full font-bold md:font-extrabold text-orange-500 text-center mt-40 md:mb-10 mb-10 after:content-[''] after:block after:h-[5px] after:w-[30%] md:after:w-[15%] after:bg-orange-500 after:mx-auto after:mt-0 md:after:mt-1 after:rounded-full"
+=======
+          className="inline-block md:text-4xl text-2xl w-full font-bold md:font-extrabold text-orange-500 text-center mt-30 md:mb-10 mb-10 after:content-[''] after:block after:h-[5px] after:w-[30%] md:after:w-[15%] after:bg-orange-500 after:mx-auto after:mt-0 md:after:mt-1 after:rounded-full"
+>>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
         >
           BCCI Office Bearers
         </motion.h1>
@@ -212,7 +226,11 @@ function Page() {
       </div>
 
       {/* Executive Section with Scroll Arrows */}
+<<<<<<< HEAD
       <div className="relative md:mt-20 -mt-30 mb-20 md:mb-0">
+=======
+      <div className="relative md:mt-0 -mt-52 mb-20 md:mb-0">
+>>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
         <motion.h1
           {...fadeInProps}
           className="inline-block md:text-4xl text-2xl w-full font-bold md:font-extrabold text-orange-500 text-center mt-40 md:mb-10 mb-10 after:content-[''] after:block after:h-[5px] after:w-[30%] md:after:w-[15%] after:bg-orange-500 after:mx-auto after:mt-0 md:after:mt-1 after:rounded-full"
@@ -220,6 +238,7 @@ function Page() {
           BCCI Elected Board
         </motion.h1>
       
+<<<<<<< HEAD
         <div className="relative w-full">
           {/* Scroll Buttons */}
           <button
@@ -227,19 +246,34 @@ function Page() {
               scrollRef.current?.scrollBy({ left: -500, behavior: "smooth" })
             }
             className="absolute z-10 top-1/2 left-2 transform -translate-y-1/2 bg-gray-500 p-2 rounded-full shadow-md hover:scale-110 transition"
+=======
+        <div className="relative w-full px-20">
+          <button
+            onClick={() =>
+              executiveRef.current?.scrollBy({ left: -500, behavior: "smooth" })
+            }
+            className="absolute z-10 top-1/2 left-5 transform -translate-y-1/2 bg-gray-500 p-2 rounded-full shadow-md hover:scale-110 transition"
+>>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
           >
             <ChevronLeft />
           </button>
           <button
             onClick={() =>
+<<<<<<< HEAD
               scrollRef.current?.scrollBy({ left: 500, behavior: "smooth" })
             }
             className="absolute z-10 top-1/2 right-2 transform -translate-y-1/2 bg-gray-500 p-2 rounded-full shadow-md hover:scale-110 transition"
+=======
+              executiveRef.current?.scrollBy({ left: 500, behavior: "smooth" })
+            }
+            className="absolute z-10 top-1/2 right-5 transform -translate-y-1/2 bg-gray-500 p-2 rounded-full shadow-md hover:scale-110 transition"
+>>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
           >
             <ChevronRight />
           </button>
       
           <div
+<<<<<<< HEAD
             ref={scrollRef}
             className="flex overflow-x-auto space-x-6 px-6 no-scrollbar scroll-smooth"
           >
@@ -257,6 +291,30 @@ function Page() {
                   {member.name}
                 </h1>
               </div>
+=======
+            ref={executiveRef}
+            className="flex overflow-x-auto space-x-6 px-6 no-scrollbar scroll-smooth"
+          >
+            {executive.map((member, index) => (
+             <div
+               key={index}
+               className="flex-shrink-0 group"
+             >
+               <div className="relative lg:w-64 w-32 lg:h-64 h-32 md:mt-10 mt-0 rounded-full overflow-hidden">
+                 <Image
+                   src={member.img}
+                   alt="executive"
+                   fill
+                   className="object-fill transition-all duration-500 group-hover:scale-105 group-hover:brightness-110"
+                 />
+                 {/* Overlay on hover */}
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+               </div>
+               <h1 className="text-nowrap text-center text-black mt-3 transition-colors duration-300 group-hover:text-orange-600">
+                 {member.name}
+               </h1>
+             </div>
+>>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
             ))}
           </div>
         </div>
@@ -272,6 +330,7 @@ function Page() {
           BCCI Nominated Board
         </motion.h1>
       
+<<<<<<< HEAD
         <div className="relative w-full">
           {/* Scroll Buttons */}
           <button
@@ -279,19 +338,35 @@ function Page() {
               scrollRef.current?.scrollBy({ left: -500, behavior: "smooth" })
             }
             className="absolute z-10 top-1/2 left-2 transform -translate-y-1/2 bg-gray-500 p-2 rounded-full shadow-md hover:scale-110 transition"
+=======
+        <div className="relative w-full px-20">
+          {/* Scroll Buttons */}
+          <button
+            onClick={() =>
+              nominatedRef.current?.scrollBy({ left: -500, behavior: "smooth" })
+            }
+            className="absolute z-10 top-1/2 left-5 transform -translate-y-1/2 bg-gray-500 p-2 rounded-full shadow-md hover:scale-110 transition"
+>>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
           >
             <ChevronLeft />
           </button>
           <button
             onClick={() =>
+<<<<<<< HEAD
               scrollRef.current?.scrollBy({ left: 500, behavior: "smooth" })
             }
             className="absolute z-10 top-1/2 right-2 transform -translate-y-1/2 bg-gray-500 p-2 rounded-full shadow-md hover:scale-110 transition"
+=======
+              nominatedRef.current?.scrollBy({ left: 500, behavior: "smooth" })
+            }
+            className="absolute z-10 top-1/2 right-5 transform -translate-y-1/2 bg-gray-500 p-2 rounded-full shadow-md hover:scale-110 transition"
+>>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
           >
             <ChevronRight />
           </button>
       
           <div
+<<<<<<< HEAD
             ref={scrollRef}
             className="flex overflow-x-auto space-x-6 px-6 no-scrollbar scroll-smooth"
           >
@@ -309,6 +384,30 @@ function Page() {
                   {member.name}
                 </h1>
               </div>
+=======
+            ref={nominatedRef}
+            className="flex overflow-x-auto space-x-6 px-6 no-scrollbar scroll-smooth"
+          >
+            {nominated.map((member, index) => (
+             <div
+               key={index}
+               className="flex-shrink-0 group"
+             >
+               <div className="relative lg:w-64 w-32 lg:h-64 h-32 md:mt-10 mt-0 rounded-full overflow-hidden">
+                 <Image
+                   src={member.img}
+                   alt="executive"
+                   fill
+                   className="object-fill transition-all duration-500 group-hover:scale-105 group-hover:brightness-110"
+                 />
+                 {/* Overlay on hover */}
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+               </div>
+               <h1 className="text-nowrap text-center text-black mt-3 transition-colors duration-300 group-hover:text-orange-600">
+                 {member.name}
+               </h1>
+             </div>
+>>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
             ))}
           </div>
         </div>

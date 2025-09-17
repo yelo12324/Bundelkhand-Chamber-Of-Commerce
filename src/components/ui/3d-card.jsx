@@ -81,7 +81,11 @@ export const CardBody = ({ children, className }) => {
   return (
     <div
       className={cn(
+<<<<<<< HEAD
         "h-80 max-w-96 [transform-style:preserve-3d] [&>*]:[transform-style:preserve-3d]",
+=======
+        "h-[350px] w-[450px] [transform-style:preserve-3d] [&>*]:[transform-style:preserve-3d]",
+>>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
         className
       )}
     >
@@ -90,6 +94,10 @@ export const CardBody = ({ children, className }) => {
   );
 };
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
 export const CardItem = ({
   as: Tag = "div",
   children,
