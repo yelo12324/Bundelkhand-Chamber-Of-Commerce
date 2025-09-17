@@ -9,12 +9,14 @@ const newsItems = [
   { src: "/Newz4.png", desc: "Corona Vaccination Drive at Bijauli, Jhansi" },
   { src: "/Newzr1.jpg", desc: "Business meet to discuss wellfare of Bundelkhand" },
   { src: "/Newzr2.jpg", desc: "MLA Ravi Sharma came to discuss their ideas for development of Bundelkhand" },
+  { src: "/Newz11.jpg", desc: "Commissioner Sir was congratulated on becoming BIDA CEO, with talks on supporting Bundelkhand entrepreneurs." },
   { src: "/Newzr3.jpg", desc: "All businessmen comes together to support the development of Bundelkhand" },
   { src: "/Newzr4.jpg", desc: "MLA Anurag Sharma showed us the right path for development of Bundelkhand" },
   { src: "/Newz6.jpeg", desc: "Felicitating GBC Ready Investors at Jhansi" },
   { src: "/Newz7.jpeg", desc: "Felicitating GBC Ready Investors at Jhansi" },
   { src: "/Newz8.jpeg", desc: "Bundelkhand Investor Summit at Jhansi" },
   { src: "/Newz9.jpeg", desc: "Bundelkhand Investor Summit at Jhansi" },
+  { src: "/Newz12.jpg", desc: "National Workshop on MSME Development organized by MSME Development Office, Kanpur" },
 ];
 
 export default function News() {
@@ -29,7 +31,7 @@ export default function News() {
 
       {/* Mobile Layout */}
       <div className="flex flex-col gap-6 lg:hidden">
-        {newsItems.slice(0, 6).map((item, i) => (
+        {newsItems.slice(0, 7).map((item, i) => (
           <NewsCard key={i} img={item.src} desc={item.desc} />
         ))}
 
@@ -48,7 +50,7 @@ export default function News() {
           </p>
         </div>
 
-        {newsItems.slice(6).map((item, i) => (
+        {newsItems.slice(7).map((item, i) => (
           <NewsCard key={i + 4} img={item.src} desc={item.desc} />
         ))}
       </div>
@@ -59,7 +61,7 @@ export default function News() {
         <div className="w-1/4 overflow-hidden h-full">
           <div className="scroll-container h-full">
             <div className="scroll-content">
-              {[...newsItems.slice(0, 6), ...newsItems.slice(0, 6)].map((item, i) => (
+              {[...newsItems.slice(0, 7), ...newsItems.slice(0, 7)].map((item, i) => (
                 <NewsCard key={i} img={item.src} desc={item.desc} />
               ))}
             </div>
@@ -94,7 +96,7 @@ export default function News() {
         <div className="w-1/4 overflow-hidden h-full">
           <div className="scroll-container h-full">
             <div className="scroll-content">
-              {[...newsItems.slice(6), ...newsItems.slice(6)].map((item, i) => (
+              {[...newsItems.slice(7), ...newsItems.slice(7)].map((item, i) => (
                 <NewsCard key={i + 8} img={item.src} desc={item.desc} />
               ))}
             </div>

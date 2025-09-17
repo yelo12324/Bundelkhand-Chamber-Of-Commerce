@@ -13,6 +13,8 @@ function Page() {
     { img: "/mediabottom-4.jpg", description: "Excellence award by Bundelkhand Chamber Of Commerce to various industrialist" },
     { img: "/mediabottom-5.jpg", description: "Clean jhansi green jhansi campaign" },
     { img: "/mediabottom-6.jpg", description: "Agro summit" },
+    { img: "/Newz12.jpg", description: "National Workshop on MSME Development organized by MSME Development Office, Kanpur" },
+    { img: "/Newz11.jpg", description: "Commissioner Sir was congratulated on becoming BIDA CEO, with talks on supporting Bundelkhand entrepreneurs." },
   ];
 
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -124,7 +126,7 @@ function Page() {
               </div>
 
               {/* Text */}
-              <div className="h-[25%] px-4 text-center text-wrap flex items-center justify-center text-sm font-medium">
+              <div className="h-[25%] px-4 text-center text-wrap flex items-center justify-center text-xs font-medium">
                 {card.description}
               </div>
             </motion.div>

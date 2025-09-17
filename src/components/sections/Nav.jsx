@@ -19,7 +19,9 @@ function Nav() {
     { href: "/servicesPage", label: "Services" },
     { href: "/sectors", label: "Sectors" },
     { href: "/memberZone", label: "Member’s Zone" },
-    { href: "/media", label: "Media" }
+    { href: "/media", label: "Media" },
+    // { href: "/joinBcci", label: "Join BCCI" }
+
   ];
 
   // useEffect(() => {
