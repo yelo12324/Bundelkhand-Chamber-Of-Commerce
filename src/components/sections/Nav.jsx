@@ -19,7 +19,9 @@ function Nav() {
     { href: "/servicesPage", label: "Services" },
     { href: "/sectors", label: "Sectors" },
     { href: "/memberZone", label: "Member’s Zone" },
-    { href: "/media", label: "Media" }
+    { href: "/media", label: "Media" },
+    // { href: "/joinBcci", label: "Join BCCI" }
+
   ];
 
   // useEffect(() => {
@@ -80,7 +82,7 @@ function Nav() {
           <img
             src="/nav1.png"
             alt="nav1"
-            className="w-[60%] h-full absolute xl:bottom-[-1.1rem] xl:left-[26rem] md:bottom-[-2.1rem] md:left-[14rem] md:w-[50%] lg:w-[55%] lg:bottom-[-2.4rem] lg:left-[13rem] z-0 object-contain"
+            className="w-[60%] h-full absolute xl:bottom-[-1.1rem] xl:left-[26rem] md:bottom-[-3.2rem] md:left-[14rem] md:w-[50%] lg:w-[55%] lg:bottom-[-3.2rem] lg:left-[13rem] z-0 object-contain"
           />
         </div>
 
@@ -147,13 +149,13 @@ function Nav() {
                     <>
                       <Link
                         href="/signup"
-                        className="block px-4 py-2 text-white font-mono text-xs hover:bg-gray-700 transition"
+                        className="block px-4 py-2 text-white hover:bg-gray-700 transition"
                       >
                         Signup
                       </Link>
                       <Link
                         href="/login"
-                        className="block px-4 py-2 text-white font-mono text-xs hover:bg-gray-700 transition"
+                        className="block px-4 py-2 text-white hover:bg-gray-700 transition"
                       >
                         Login
                       </Link>
