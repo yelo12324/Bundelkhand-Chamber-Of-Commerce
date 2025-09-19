@@ -25,7 +25,7 @@ export default function ContactPage() {
     { img: "/contact13.jpg" },
     { img: "/contact14.jpg" },
     { img: "/contact15.jpg" },
-    { img: "/contact16.jpg" },
+    { img: "/contact16.jpeg" },
     { img: "/contact17.jpg" },
     { img: "/contact19.jpg" },
     { img: "/contact20.jpg" },

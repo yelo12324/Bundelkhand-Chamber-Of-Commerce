@@ -20,6 +20,7 @@ function Nav() {
     { href: "/sectors", label: "Sectors" },
     { href: "/memberZone", label: "Member’s Zone" },
     { href: "/media", label: "Media" },
+    { href: "/join-bcci", label: "Join BCCI" },
     // { href: "/joinBcci", label: "Join BCCI" }
 
   ];

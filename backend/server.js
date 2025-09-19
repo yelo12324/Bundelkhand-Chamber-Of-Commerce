@@ -218,28 +218,36 @@ app.post("/login", async (req, res) => {
   }
 });
 
+// ====================================================================
+//  --------------- NODEMAILER TRANSPORTER  (GMAIL) ------------------
+// ====================================================================
+
+const transporter = nodemailer.createTransport({
+  service: "gmail", 
+  auth: {
+    user: "bccijhansi@gmail.com",   
+    pass: "xjvi tyzw iair otbm",      
+  },
+});
 
 // ----------------  CONTACT ROUTE ---------------------------
-
-
- // Create transporter (use your email and password or app password)
 
 app.post('/contact', async (req, res) => {
   const { name, email, phone, typeMessage } = req.body;
   console.log('req.body = ', req.body)
   // Create Gmail transporter
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'pallavipatel8080@gmail.com',           // ✅ Your Gmail address
-      pass: 'tpxz twij waqz ussf',             // ✅ App password (not your regular password)
-    }
-  });
+  // const transporter = nodemailer.createTransport({
+  //   service: 'gmail',
+  //   auth: {
+  //     user: 'bccijhansi@gmail.com',           // ✅ Your Gmail address
+  //     pass: 'xjvi tyzw iair otbm',             // ✅ App password (not your regular password)
+  //   }
+  // });
 
   try {
     const info = await transporter.sendMail({
       from: `"${name}" <${email}>`,          // Sender (user's email)
-      to: 'pallavipatel8080@gmail.com',             // ✅ Your email to receive the message
+      to: 'bccijhansi@gmail.com',             // ✅ Your email to receive the message
       subject: `New Contact Message from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${typeMessage}`,
       html: `
@@ -256,6 +264,41 @@ app.post('/contact', async (req, res) => {
   } catch (error) {
     console.error("Error sending email:", error);
     res.status(500).json({ success: false, error: "Failed to send message." });
+  }
+});
+
+// ----------------  JOIN BCCI FORM ROUTE ---------------------------
+
+// Route to send email
+app.post("/send-form", async (req, res) => {
+  try {
+    const formData = req.body;
+
+    const mailOptions = {
+      from: `"BCCI Join Form" <${formData.email}>`,
+      to: "pallavipatel8080@gmail.com", // where you want to receive form submissions
+      subject: "New BCCI Join Form Submission",
+      html: `
+        <h2>New Application Received</h2>
+        <p><b>Name:</b> ${formData.firstName} ${formData.lastName}</p>
+        <p><b>Company Address:</b> ${formData.addressLine1}, ${formData.addressLine2}, ${formData.city}, ${formData.state}, ${formData.zip}, ${formData.country}</p>
+        <p><b>Email:</b> ${formData.email}</p>
+        <p><b>Mobile:</b> ${formData.mobile}</p>
+        <p><b>GSTIN:</b> ${formData.gstin}</p>
+        <p><b>MSME:</b> ${formData.msme}</p>
+        <p><b>PAN:</b> ${formData.pan}</p>
+        <p><b>Entity Type:</b> ${formData.entityType}</p>
+        <p><b>Year of Establishment:</b> ${formData.year}</p>
+        <p><b>Business Interests:</b> ${formData.businessInterests}</p>
+        <p><b>Consent:</b> ${formData.consent ? "Yes" : "No"}</p>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ success: true, message: "Form submitted successfully!" });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res.status(500).json({ success: false, message: "Error sending email", error });
   }
 });
 

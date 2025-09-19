@@ -13,27 +13,15 @@ function Page() {
     { img: "/mediabottom-4.jpg", description: "Excellence award by Bundelkhand Chamber Of Commerce to various industrialist" },
     { img: "/mediabottom-5.jpg", description: "Clean jhansi green jhansi campaign" },
     { img: "/mediabottom-6.jpg", description: "Agro summit" },
-<<<<<<< HEAD
-    { img: "/Newz12.jpg", description: "National Workshop on MSME Development organized by MSME Development Office, Kanpur" },
-    { img: "/Newz11.jpg", description: "Commissioner Sir was congratulated on becoming BIDA CEO, with talks on supporting Bundelkhand entrepreneurs." },
-=======
->>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
   ];
 
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [expanded, setExpanded] = useState(false);
 
-<<<<<<< HEAD
-  const fadeIn = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
-=======
   // const fadeIn = {
   //   hidden: { opacity: 0, y: 10 },
   //   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   // };
->>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
 
   return (
     <div>
@@ -43,11 +31,7 @@ function Page() {
 
       {/* Heading */}
       <motion.div
-<<<<<<< HEAD
-        variants={fadeIn}
-=======
         // variants={fadeIn}
->>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -109,11 +93,7 @@ function Page() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-<<<<<<< HEAD
-          variants={fadeIn}
-=======
           // variants={fadeIn}
->>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
           viewport={{ once: true }}
           className={`${
             expanded
@@ -124,11 +104,7 @@ function Page() {
           {media.map((card, index) => (
             <motion.div
               key={index}
-<<<<<<< HEAD
-              variants={fadeIn}
-=======
               // variants={fadeIn}
->>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
               whileInView="visible"
               initial="hidden"
               viewport={{ once: true }}
@@ -148,11 +124,7 @@ function Page() {
               </div>
 
               {/* Text */}
-<<<<<<< HEAD
-              <div className="h-[25%] px-4 text-center text-wrap flex items-center justify-center text-xs font-medium">
-=======
               <div className="h-[25%] px-4 text-center text-wrap flex items-center justify-center text-sm font-medium">
->>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
                 {card.description}
               </div>
             </motion.div>
@@ -163,11 +135,7 @@ function Page() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-<<<<<<< HEAD
-          variants={fadeIn}
-=======
           // variants={fadeIn}
->>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
           viewport={{ once: true }}
           className="flex justify-center items-center mt-3"
         >
@@ -188,11 +156,7 @@ function Page() {
       </motion.div>
 
       <motion.div
-<<<<<<< HEAD
-        variants={fadeIn}
-=======
         // variants={fadeIn}
->>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}

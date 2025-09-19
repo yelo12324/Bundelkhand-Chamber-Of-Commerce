@@ -2,10 +2,6 @@
 import React from "react";
 import "./news.css";
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
 const newsItems = [
   { src: "/Newz1.png", desc: "Honourable Minister of State for Industry Respected Shri Bhanu Pratap Verma Ji" },
   { src: "/Newz2.png", desc: "Ground Breaking Ceremony of Invest in UP" },
@@ -13,11 +9,6 @@ const newsItems = [
   { src: "/Newz4.png", desc: "Corona Vaccination Drive at Bijauli, Jhansi" },
   { src: "/Newzr1.jpg", desc: "Business meet to discuss wellfare of Bundelkhand" },
   { src: "/Newzr2.jpg", desc: "MLA Ravi Sharma came to discuss their ideas for development of Bundelkhand" },
-<<<<<<< HEAD
-  { src: "/Newz11.jpg", desc: "Commissioner Sir was congratulated on becoming BIDA CEO, with talks on supporting Bundelkhand entrepreneurs." },
-  { src: "/Newzr3.jpg", desc: "All businessmen comes together to support the development of Bundelkhand" },
-  { src: "/Newzr4.jpg", desc: "MLA Anurag Sharma showed us the right path for development of Bundelkhand" },
-=======
   { src: "/Newzr3.jpg", desc: "All businessmen comes together to support the development of Bundelkhand" },
   { src: "/Newzr4.jpg", desc: "MLA Anurag Sharma showed us the right path for development of Bundelkhand" },
   {src: "/Newzr5.jpeg", desc:"Showcasing Presentation Of BIDA"},
@@ -26,15 +17,10 @@ const newsItems = [
   {src: "/Newzr8.jpeg", desc:"Honouring To Mr. Anuraj Sharma Ji By Bundelkhand Chamber Of Commerce"},
   {src: "/Newzr9.jpeg", desc:"Discussion On Budget Of Bundelkhand Chamber Of Commerce"},
   {src: "/Newzr10.jpeg", desc:"Estimated Budget Of Bundelkhand Chamber Of Commerce 2025-26"},  
->>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
   { src: "/Newz6.jpeg", desc: "Felicitating GBC Ready Investors at Jhansi" },
   { src: "/Newz7.jpeg", desc: "Felicitating GBC Ready Investors at Jhansi" },
   { src: "/Newz8.jpeg", desc: "Bundelkhand Investor Summit at Jhansi" },
   { src: "/Newz9.jpeg", desc: "Bundelkhand Investor Summit at Jhansi" },
-<<<<<<< HEAD
-  { src: "/Newz12.jpg", desc: "National Workshop on MSME Development organized by MSME Development Office, Kanpur" },
-=======
->>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
 ];
 
 export default function News() {
@@ -49,11 +35,7 @@ export default function News() {
 
       {/* Mobile Layout */}
       <div className="flex flex-col gap-6 lg:hidden">
-<<<<<<< HEAD
-        {newsItems.slice(0, 7).map((item, i) => (
-=======
         {newsItems.slice(0, 9).map((item, i) => (
->>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
           <NewsCard key={i} img={item.src} desc={item.desc} />
         ))}
 
@@ -72,11 +54,7 @@ export default function News() {
           </p>
         </div>
 
-<<<<<<< HEAD
-        {newsItems.slice(7).map((item, i) => (
-=======
         {newsItems.slice(9).map((item, i) => (
->>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
           <NewsCard key={i + 4} img={item.src} desc={item.desc} />
         ))}
       </div>
@@ -87,11 +65,7 @@ export default function News() {
         <div className="w-1/4 overflow-hidden h-full">
           <div className="scroll-container h-full">
             <div className="scroll-content">
-<<<<<<< HEAD
-              {[...newsItems.slice(0, 7), ...newsItems.slice(0, 7)].map((item, i) => (
-=======
               {[...newsItems.slice(0, 9), ...newsItems.slice(0, 9)].map((item, i) => (
->>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
                 <NewsCard key={i} img={item.src} desc={item.desc} />
               ))}
             </div>
@@ -126,11 +100,7 @@ export default function News() {
         <div className="w-1/4 overflow-hidden h-full">
           <div className="scroll-container h-full">
             <div className="scroll-content">
-<<<<<<< HEAD
-              {[...newsItems.slice(7), ...newsItems.slice(7)].map((item, i) => (
-=======
               {[...newsItems.slice(9), ...newsItems.slice(9)].map((item, i) => (
->>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
                 <NewsCard key={i + 8} img={item.src} desc={item.desc} />
               ))}
             </div>

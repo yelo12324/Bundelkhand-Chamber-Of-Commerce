@@ -26,11 +26,7 @@ export default function SectorCard({ name, image, description }) {
 
             {/* Black overlay with description */}
             <div className="absolute bottom-0 inset-0 flex items-end justify-center">
-<<<<<<< HEAD
-              <p className="text-white text-sm md:text-base lg:text-md font-medium text-center bg-black/60 rounded-lg px-2 py-3">
-=======
               <p className="text-white text-sm md:text-base lg:text-md font-medium text-center bg-black/60 rounded-b-lg px-3 py-6">
->>>>>>> 3cc8964d7b64fef45258009a6c3263bcb9ac4476
                 {description}
               </p>
             </div>

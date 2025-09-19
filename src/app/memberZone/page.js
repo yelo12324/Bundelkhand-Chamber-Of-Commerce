@@ -10,6 +10,11 @@ import toast, { Toaster } from "react-hot-toast";
 const tabs = ['Service Members', 'Industry Members', 'Business Members', 'Enroll Now'];
 const BASE_URL = "https://backend-bcoc.onrender.com";
 
+const fadeInVariants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
 export default function Page() {
   const [activeTab, setActiveTab] = useState('Service Members');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -25,7 +30,7 @@ export default function Page() {
   const [selectedDept, setSelectedDept] = useState("Select Department");
   const departments = ["Service", "Industry", "Business"];
 
-  // Single, powerful useEffect for fetching data
+  // Data fetch effect
   useEffect(() => {
     let endpoint = '';
     if (activeTab === 'Service Members') endpoint = 'service';
@@ -33,7 +38,7 @@ export default function Page() {
     else if (activeTab === 'Business Members') endpoint = 'business';
 
     if (!endpoint) {
-        setData([]); // Clear data for non-data tabs like "Enroll Now"
+        setData([]); 
         return;
     }
 
@@ -42,9 +47,7 @@ export default function Page() {
       setError(null);
       try {
         const res = await fetch(`${BASE_URL}/memberZone/${endpoint}?page=${pagination.currentPage}&limit=20`);
-        if (!res.ok) {
-          throw new Error(`HTTP error! Status: ${res.status}`);
-        }
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
         const paginatedResponse = await res.json();
         setData(paginatedResponse.data);
         setPagination(prev => ({ ...prev, totalPages: paginatedResponse.totalPages }));
@@ -57,7 +60,7 @@ export default function Page() {
     };
 
     fetchData();
-  }, [activeTab, pagination.currentPage]); // Re-fetches when tab or page changes
+  }, [activeTab, pagination.currentPage]);
 
   // Pagination handlers
   const handleNextPage = () => {
@@ -72,7 +75,7 @@ export default function Page() {
     }
   };
   
-  // Dynamic table headers based on active tab
+  // Dynamic table headers
   const getTableHeaders = () => {
     switch (activeTab) {
       case 'Service Members':
@@ -86,7 +89,7 @@ export default function Page() {
   };
   const tableHeaders = getTableHeaders();
   
-  // Enroll Now form submission handler
+  // Enroll Now form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = {
@@ -116,25 +119,26 @@ export default function Page() {
     }
   };
 
-  const fadeInProps = {
-    initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, ease: "easeOut" },
-    viewport: { once: true },
-  };
-
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col">
+     <div>
       <Toaster position="top-right" reverseOrder={false} />
-      <Nav />
-
+      <Nav className="fixed top-0 left-0 w-full z-50 bg-white shadow" />
+     </div>
+     
       {/* Hero Section */}
       <div className="px-10">
         <div
           className="hidden w-full min-h-[400px] lg:flex flex-col items-center rounded-2xl justify-center bg-cover bg-center"
           style={{ backgroundImage: "url('/memberZone.jpg')" }}
         ></div>
-        <motion.h1 {...fadeInProps} className="inline-block md:text-6xl text-2xl w-full font-bold md:font-extrabold text-orange-500 text-center mt-40 md:mt-10 md:mb-10 mb-10 after:content-[''] after:block md:after:h-[5px] after:h-[3px] after:w-[30%] md:after:w-[20%] after:bg-orange-500 after:mx-auto after:mt-0 md:after:mt-1 after:rounded-full">
+        <motion.h1
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInVariants}
+          className="inline-block md:text-6xl text-2xl w-full font-bold md:font-extrabold text-orange-500 text-center mt-40 md:mt-10 md:mb-10 mb-10 after:content-[''] after:block md:after:h-[5px] after:h-[3px] after:w-[30%] md:after:w-[20%] after:bg-orange-500 after:mx-auto after:mt-0 md:after:mt-1 after:rounded-full"
+        >
           Members Zone
         </motion.h1>
       </div>
@@ -168,16 +172,27 @@ export default function Page() {
           ))}
         </div>
 
-        {/* Dynamic Content Area */}
+        {/* Dynamic Content */}
         <div className="mt-8">
           {activeTab !== 'Enroll Now' && (
-            <div className="animate-fadeIn">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInVariants}
+            >
               {isLoading && <p className="text-center text-gray-500">Loading members...</p>}
               {error && <p className="text-center text-red-500">{error}</p>}
               {!isLoading && !error && data.length === 0 && <p className="text-center text-gray-500">No members found.</p>}
               {!isLoading && !error && data.length > 0 && (
                 <>
-                  <div className="overflow-x-auto shadow-lg rounded-lg border border-gray-200 bg-white">
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeInVariants}
+                    className="overflow-x-auto shadow-lg rounded-lg border border-gray-200 bg-white"
+                  >
                     <table className="min-w-full text-left text-gray-700">
                       <thead className="bg-gray-100 text-gray-800 uppercase text-sm">
                         <tr>
@@ -195,10 +210,16 @@ export default function Page() {
                         ))}
                       </tbody>
                     </table>
-                  </div>
+                  </motion.div>
 
-                  {/* Pagination Controls */}
-                  <div className="flex justify-between items-center mt-6">
+                  {/* Pagination */}
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeInVariants}
+                    className="flex justify-between items-center mt-6"
+                  >
                     <button onClick={handlePrevPage} disabled={pagination.currentPage === 1} className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
                       <ArrowLeft size={16} /> Previous
                     </button>
@@ -208,18 +229,23 @@ export default function Page() {
                     <button onClick={handleNextPage} disabled={pagination.currentPage === pagination.totalPages} className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
                       Next <ArrowRight size={16} />
                     </button>
-                  </div>
+                  </motion.div>
                 </>
               )}
-            </div>
+            </motion.div>
           )}
 
           {/* Enroll Now Form */}
           {activeTab === "Enroll Now" && (
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="mt-8 shadow-xl rounded-2xl border border-orange-200 bg-white p-8 max-w-2xl mx-auto">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInVariants}
+              className="mt-8 shadow-xl rounded-2xl border border-orange-200 bg-white p-8 max-w-2xl mx-auto"
+            >
               <h2 className="text-3xl font-bold text-orange-500 mb-8 text-center">Enroll Now</h2>
               <form className="space-y-6" onSubmit={handleSubmit}>
-                {/* Form fields remain the same, just ensure state for dropdown is correct */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
                   <input type="text" name="name" placeholder="Enter your full name" required className="w-full px-4 py-3 border border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none transition" />
@@ -240,7 +266,13 @@ export default function Page() {
                   </button>
                   <AnimatePresence>
                     {isDeptOpen && (
-                      <motion.ul initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: "easeInOut" }} className="overflow-hidden border border-orange-200 rounded-lg mt-2 bg-white shadow-md">
+                      <motion.ul
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="overflow-hidden border border-orange-200 rounded-lg mt-2 bg-white shadow-md"
+                      >
                         {departments.map((dept) => (
                           <li key={dept} onClick={() => { setSelectedDept(dept); setIsDeptOpen(false); }} className="px-4 py-2 cursor-pointer hover:bg-orange-100 transition">
                             {dept}
@@ -255,7 +287,12 @@ export default function Page() {
                   <textarea name="business" placeholder="Tell us more about your business..." rows={4} className="w-full px-4 py-3 border border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none transition"></textarea>
                 </div>
                 <div className="flex justify-center">
-                  <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }} type="submit" className="bg-orange-500 text-white font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-orange-600 transition-all">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.97 }}
+                    type="submit"
+                    className="bg-orange-500 text-white font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-orange-600 transition-all"
+                  >
                     Submit
                   </motion.button>
                 </div>
@@ -268,11 +305,6 @@ export default function Page() {
       <div className='mt-20 md:mt-10'>
         <Footer />
       </div>
-
-      <style jsx>{`
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fadeIn { animation: fadeIn 0.4s ease-in-out; }
-      `}</style>
     </div>
   );
 }
